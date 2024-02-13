@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const voteSchema = mongoose.Schema(
+const voteSchema = new mongoose.Schema(
   {
     name: String,
     phone: String,
@@ -14,10 +14,12 @@ const voteSchema = mongoose.Schema(
         "faculty5",
         "faculty6",
       ],
+      required: true,
     },
     level: {
       type: Number,
       enum: [100, 200, 300, 400, 500],
+      required: true,
     },
     bestFacultyPerformance: {
       type: String,
@@ -29,6 +31,7 @@ const voteSchema = mongoose.Schema(
         "faculty5",
         "faculty6",
       ],
+      required: true,
     },
     bestinduvidualPerformance: {
       type: String,
@@ -40,7 +43,13 @@ const voteSchema = mongoose.Schema(
         "performance5",
         "performance6",
       ],
+      required: true,
     },
+    url: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'VotingURL', // Reference to the URL schema
+        required: true
+      }
   },
   {
     timestamps: true,
@@ -55,4 +64,4 @@ const voteSchema = mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Vote', voteSchema);
+module.exports = mongoose.model("Vote", voteSchema);
