@@ -4,7 +4,7 @@ const styles = {
   homeheader: "px-[10px] md:px-[80px] xl:px-[162px] ",
   container: " mx-[20px] md:px-[20px]",
   navContainer:
-    "px-[16px] py-[30px]  md:px-[80px] md:py-[20px]  lg:pl[80px] lg:pt-[-100px] lg:pr-[80px]  xl:px-[400px] xl:py-[150px] color-[red]",
+    "px-[16px] py-[30px]  md:px-[120px] md:py-[10px]  lg:pl[80px] lg:pt-[-100px] lg:pr-[80px]  xl:px-[400px] xl:py-[150px]",
   searchContainer:
     "px-[16px] py-[50px]  md:px-[80px] md:pt-[0px]  md:pb-[0px] lg:pl[80px] lg:pt-[-100px] lg:pr-[80px]  xl:px-[400px] xl:py-[150px] color-[red]",
   TextContainer:
@@ -12,7 +12,7 @@ const styles = {
   headerTextContainer:
     "px-[16px] py-[50px]  md:p-[80px] md:py-[10px] md:pr-[200px] md:pb-[130px] lg:py-[80px] lg:px-[80px]  xl:px-[400px] xl:py-[150px]",
   heading:
-    "text-[38px] md:text-[58px] lg:text-[58px] xl:text-[68px] lg:leading-[150%]",
+    "text-[40px] md:text-[58px] lg:text-[98px] xl:text-[68px] lg:leading-[150%]",
   paragraph:
     "text-[14px] md:text-[14px] lg:text-[16px] xl:text-[18px] text-Grey-60",
   subContainer:
@@ -21,7 +21,7 @@ const styles = {
   cardHeading:
     "text-[18px] md:text-[20px] lg:text-[24px] xl:text-[24px] text-white-90",
   buttonPadding:
-    "hover:bg-[#946cf9] px-[20px] py-[14px] lg:px-[24px] lg:py-[18px] text-[14px] md:text-[18px] rounded-[8px]",
+    "hover:bg-[white] hover:text-Purple-60 px-[20px] py-[14px] lg:px-[24px] lg:py-[18px] text-[14px] md:text-[18px] rounded-[8px]",
   purpleButton: "bg-Purple-60 rounded-[8px]",
   blackButton: "border border-Grey-15  rounded-[8px]",
   formContainer:

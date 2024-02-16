@@ -9,13 +9,11 @@ import { urls } from "../qrCodes";
 const HomePage = () => {
   return (
     <>
-      {/* <NavBar /> */}
       <Header />
       <div>
         <VoterForm />
         <Scanner />
-        {/* <GenerateQR /> */}
-        <div className="qrcodeContainer">
+        <div className="container qrcodeContainer">
           {urls.map((url, index) => (
             <GenerateQR key={index} value={url.url} index={index} />
           ))}
