@@ -77,8 +77,8 @@ export const QrCodeScannerProvider = ({ children }) => {
     const updatedFormData = { ...formData, voteUrl: scanResult };
 
     if ( !updatedFormData.voteUrl) {
-      console.log("Ensure you fill all form fields and scan a valid QRcode to Vote");
-      toast.error("Ensure you fill all form fields and scan a valid QRcode to Vote", {
+      console.log("kindly Ensure you fill all form fields correctly and scan a valid QRcode to Vote");
+      toast.error("kindly Ensure you fill all form fields correctly and scan a valid QRcode to Vote", {
         autoClose: 3000,
       });
       setLoading(false); // Set loading state to false when form validation fails
@@ -129,7 +129,7 @@ export const QrCodeScannerProvider = ({ children }) => {
         });
       } else {
         console.error("Unknown error occurred:", error);
-        toast.error("An unknown error occurred", {
+        toast.error("An error occurred while attempting to cast a vote", {
           autoClose: 3000,
         });
       }
