@@ -10,17 +10,17 @@ const NavBar = () => {
   const [showNav, setShowNav] = useState(false);
 
   const navLinks = [
-    { title: "Home", id: "home" },
-    { title: "About us", id: "about us" },
-    { title: "Churches", id: "churches" },
-    { title: "Events", id: "events" },
-    { title: "Initiatives", id: "initiatives" },
+    { title: "Home", id: "#home" },
+    { title: "Churches", id: "#churches" },
+    { title: "Events", id: "#events" },
+    { title: "Initiatives", id: "#initiatives" },
+    { title: "About us", id: "#about us" },
   ];
 
   return (
     <nav className={` bg-Grey-10 `}>
       <div
-        className={`${styles.navContainer} bg-Grey-15 fixed top-0 z-20 w-full flex justify-between items-center p-4`}
+        className={`${styles.navContainer} bg-Grey-15 fixed top-0 z-20 w-full flex justify-between items-center`}
       >
         <a href="/" className="logo">
           <img src={logo} alt="BLW logo image" className="w-[50px] h-[auto]" />
@@ -60,7 +60,7 @@ const NavBar = () => {
         </div>
 
         {showNav ? (
-          <div className="w-[200px] font-[20px] fixed top-0 bg-[#a685fa] z-10 right-0 p-[10px] h-[100vh] flex flex-col sm:hidden">
+          <div className="w-[200px] font-[20px] fixed top-0 bg-[#6e6bf2] z-10 right-0 p-[10px] h-[100vh] flex flex-col sm:hidden">
             <div className="flex justify-between items-center">
               <a href="/" className=" flex w-[100px] h-[50px] cursor-pointer">
                 <img src={logo} alt={"...."} />
@@ -96,7 +96,7 @@ const NavBar = () => {
                 </li>
               ))}
             </ul>
-            <button className="bg-gray-08 border border-gray-15 rounded p-2">
+            <button className="w-[150px] my-[10px] text-center bg-gray-08 border border-gray-15 rounded p-2">
               Contact
             </button>
           </div>
