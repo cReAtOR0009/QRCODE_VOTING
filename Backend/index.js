@@ -20,8 +20,8 @@ app.get("/", (req, res) => {
 
 app.post("/", async (req, res) => {
   let response = defaultServerResponse;
-
-  try {
+  console.log(req.body)
+  try {  
     //get form data from body
     const {
       fullName,
@@ -30,9 +30,9 @@ app.post("/", async (req, res) => {
       level,
       bestFacultyPerformance,
       bestinduvidualPerformance,
-      voteUrl,
+      voteUrl, 
     } = req.body;
-
+  
     // check if url has been used before
     //check if url exist in db, then check status
     let existingUrl = await VotingURL.findOne({ url: voteUrl });
@@ -74,14 +74,16 @@ app.post("/", async (req, res) => {
     response.status = 200;
     response.message = voteResponse.successfull;
     response.data = await formatMongoData(newVote);
+    response.Error = ""
   } catch (error) {
     console.log("error occured while attpemting voting", error);
     response.status = defaultServerResponse.status
     response.message = voteResponse.unSuccessfull; 
     response.data = {}
-    response.Error = "error occured while attpemting voting";
+    response.Error = error.message;
   } finally {
     res.status(response.status).send(response);
+    console.log(response) 
   }
 });
 

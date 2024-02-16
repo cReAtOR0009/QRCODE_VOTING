@@ -36,12 +36,12 @@ const voteSchema = new mongoose.Schema(
     bestinduvidualPerformance: {
       type: String,
       enum: [
-        "performance1",
-        "performance2",
-        "performance3",
-        "performance4",
-        "performance5",
-        "performance6",
+        "contestant A",
+        "contestant B",
+        "contestant C",
+        "contestant D",
+        "contestant E",
+        "contestant F",
       ], 
       required: true,
     },
