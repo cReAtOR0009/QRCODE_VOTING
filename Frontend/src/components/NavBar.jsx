@@ -31,21 +31,21 @@ const NavBar = () => {
               key={index}
               className={` ${
                 activeNav === navlink.id
-                  ? "rounded-[8px] py-[10px] bg-Grey-10 border border-Grey-15"
+                  ? "rounded-[8px] py-[10px] bg-Purple-60 border border-Grey-15"
                   : ""
               }`}
               onClick={() => setNavActive(navlink.id)}
             >
               <Link
                 to={navlink.id === "home" ? `/` : navlink.id}
-                className="px-[15px] py-[10px] w-[150px] h-[50px] text-center "
+                className="text-white px-[15px] py-[10px] w-[150px] h-[50px] text-center "
               >
                 {navlink.title}
               </Link>
             </li>
           ))}
         </ul>
-        <button className="hidden sm:flex bg-gray-08 border border-gray-15 rounded p-2">
+        <button className="text-white hidden sm:flex bg-gray-08 border border-gray-15 rounded p-2">
           Contact
         </button>
         <div
@@ -60,7 +60,7 @@ const NavBar = () => {
         </div>
 
         {showNav ? (
-          <div className="w-[200px] font-[20px] fixed top-0 bg-[#6e6bf2] z-10 right-0 p-[10px] h-[100vh] flex flex-col sm:hidden">
+          <div className="w-[200px] font-[20px] fixed top-0 bg-Grey-15 z-10 right-0 p-[10px] h-[100vh] flex flex-col sm:hidden">
             <div className="flex justify-between items-center">
               <a href="/" className=" flex w-[100px] h-[50px] cursor-pointer">
                 <img src={logo} alt={"...."} />
@@ -80,16 +80,16 @@ const NavBar = () => {
                   key={index}
                   className={`w-[150px] my-[10px] text-center  ${
                     activeNav === navlink.id
-                      ? "rounded-[8px]  bg-Grey-10 border border-Grey-15"
+                      ? "rounded-[8px]  bg-Purple-60 border border-Grey-15"
                       : ""
-                  }`}
+                  } text-white`}
                   onClick={() => {
                     setNavActive(navlink.id), setShowNav(false);
                   }}
                 >
                   <Link
                     to={navlink.id === "home" ? `/` : navlink.id}
-                    className="w-[100%] h-[100%] leading-[50px] px-[10px] block text-gray-700"
+                    className="text-white w-[100%] h-[100%] leading-[50px] px-[10px] block text-gray-700"
                   >
                     {navlink.title}
                   </Link>
