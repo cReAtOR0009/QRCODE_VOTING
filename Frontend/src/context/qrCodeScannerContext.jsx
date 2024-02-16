@@ -76,6 +76,15 @@ export const QrCodeScannerProvider = ({ children }) => {
 
     const updatedFormData = { ...formData, voteUrl: scanResult };
 
+    if ( !updatedFormData.voteUrl) {
+      console.log("Ensure you fill all form fields and scan a valid QRcode to Vote");
+      toast.error("Ensure you fill all form fields and scan a valid QRcode to Vote", {
+        autoClose: 3000,
+      });
+      setLoading(false); // Set loading state to false when form validation fails
+      return;
+    }
+
     if (
       !updatedFormData.fullName ||
       !updatedFormData.phone ||
