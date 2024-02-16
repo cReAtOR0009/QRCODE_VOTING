@@ -113,9 +113,9 @@ export const QrCodeScannerProvider = ({ children }) => {
         phone: "",
         faculty: "",
         level: "",
-        bestFaculty: "",
-        bestIndividualPerformance: "",
-        url: "",
+        bestFacultyPerformance: "",
+        bestinduvidualPerformance: "",
+        voteUrl: "",
       });
       setLoading(false); // Set loading state to false after successful form submission
       toast.success(response.data.message, {
