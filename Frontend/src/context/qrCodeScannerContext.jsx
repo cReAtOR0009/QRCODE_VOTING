@@ -171,9 +171,6 @@ export const QrCodeScannerProvider = ({ children }) => {
     // console.log(`Code matched = ${decodedText}`, decodedResult);
     setScanResult(decodedText);
 
-    // Wait for setScanResult to complete before proceeding
-    await new Promise((resolve) => setTimeout(resolve, 0));
-    
     await handleSubmit(null);
     html5QrCode
       .stop()
