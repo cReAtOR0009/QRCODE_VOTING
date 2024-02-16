@@ -85,7 +85,7 @@ export const QrCodeScannerProvider = ({ children }) => {
 
     try {
       // Send form data to the server using the vote function
-      const response = await vote(updatedFormData, "http://localhost:3000/");
+      const response = await vote(updatedFormData, "https://qrvotingbackend.onrender.com/");
       setScanResult("");
       setFormData({
         fullName: "",
@@ -102,11 +102,11 @@ export const QrCodeScannerProvider = ({ children }) => {
         toast.error(error.message, {
           autoClose: 3000,
         });
-      }
+      } 
       toast.error(error.response.data.Error, {
         autoClose: 3000,
       });
-    }
+    } 
   };
 
   async function getCameras() {
