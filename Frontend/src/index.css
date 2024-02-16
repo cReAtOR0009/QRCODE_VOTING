@@ -21,6 +21,7 @@
 }
 
 #reader {
+  margin-block: 20px;
   margin: 0 auto;
   display: flex;
   place-items: center;
