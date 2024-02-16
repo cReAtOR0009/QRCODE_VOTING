@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const voteSchema = new mongoose.Schema(
   {
-    name: String,
+    fullName: String,
     phone: String,
     faculty: {
       type: String,
