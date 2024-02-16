@@ -17,7 +17,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 * {
-  /* border: 1px solid #535bf2; */  
+  /* border: 1px solid #535bf2; */
 }
 
 #reader {
@@ -79,8 +79,32 @@ button:focus-visible {
 }
 
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   /* margin: 0 auto; */
+}
+
+/* animation Loadinf Styles */
+.loadingAnimation {
+  display: flex;
+  align-items: center;
+  place-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  border-radius: 50%;
+  border: 5px solid #646cff;
+  border-bottom: 10px dotted #646cff;
+  border-top: 10px dotted #646cff;
+  height: 100px;
+  width: 100px;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg); /* Starting rotation angle */
+  }
+  to {
+    transform: rotate(360deg); /* Ending rotation angle */
+  }
 }
 
 @media (prefers-color-scheme: light) {
