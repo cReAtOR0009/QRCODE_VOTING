@@ -4,7 +4,7 @@ import { styles } from "../styles/styles";
 // import { FormContext } from "../context/formContext";
 import { qrCodeScannerContext } from "../context/qrCodeScannerContext";
 
-const  VoterForm = () => {
+const VoterForm = () => {
   const {
     formData,
     handleChange,
