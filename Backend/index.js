@@ -1,18 +1,32 @@
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv").config();
+
+const cookieParser = require("cookie-parser");
+
 const VotingURL = require("./database/models/urlModel");
 const Vote = require("./database/models/voteModel");
 const dbConnection = require("./database/connection");
 const { formatMongoData } = require("./utilities/formatMongoData");
+
+const adminRoutes = require("./routes/adminRoutes");
+
 const constants = require("./constants/index");
 const defaultServerResponse = constants.defaultServerResponse;
 const voteResponse = constants.voteResponse;
 
 const app = express();
+const path = require("path");
+app.set("view engine", "ejs");
+
+// Serve static assets
+app.use("/assets", express.static(path.join(__dirname, "assets")));
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 dbConnection();
+
+app.use("/admin", adminRoutes);
 
 app.get("/", (req, res) => {
   res.json({ data: "server is working" });
@@ -20,8 +34,8 @@ app.get("/", (req, res) => {
 
 app.post("/", async (req, res) => {
   let response = defaultServerResponse;
-  console.log(req.body)
-  try {  
+  console.log(req.body);
+  try {
     //get form data from body
     const {
       fullName,
@@ -30,9 +44,9 @@ app.post("/", async (req, res) => {
       level,
       bestFacultyPerformance,
       bestinduvidualPerformance,
-      voteUrl, 
+      voteUrl,
     } = req.body;
-  
+
     // check if url has been used before
     //check if url exist in db, then check status
     let existingUrl = await VotingURL.findOne({ url: voteUrl });
@@ -53,7 +67,7 @@ app.post("/", async (req, res) => {
       phone: phone,
       faculty: faculty,
       level: level,
-      bestFacultyPerformance: bestFacultyPerformance, 
+      bestFacultyPerformance: bestFacultyPerformance,
       bestinduvidualPerformance: bestinduvidualPerformance,
       url: existingUrl.id,
     });
@@ -62,7 +76,7 @@ app.post("/", async (req, res) => {
 
     await VotingURL.findByIdAndUpdate(
       { _id: existingUrl.id },
-      { used: true,  vote: newVote.id },
+      { used: true, vote: newVote.id },
       {
         new: true,
       }
@@ -74,25 +88,23 @@ app.post("/", async (req, res) => {
     response.status = 200;
     response.message = voteResponse.successfull;
     response.data = await formatMongoData(newVote);
-    response.Error = ""
-  } catch (error) { 
+    response.Error = "";
+  } catch (error) {
     console.log("error occured while attpemting voting", error);
-    response.status = defaultServerResponse.status
-    response.message = voteResponse.unSuccessfull; 
-    response.data = {}
+    response.status = defaultServerResponse.status;
+    response.message = voteResponse.unSuccessfull;
+    response.data = {};
     response.Error = error.message;
   } finally {
     res.status(response.status).send(response);
-    console.log(response) 
+    console.log(response);
   }
 });
 
 app.post("/addurl", async (req, res) => {
-
-  let response = defaultServerResponse
+  let response = defaultServerResponse;
 
   try {
-
     const { url } = req.body;
     const newUrl = new VotingURL({ url: url });
 
@@ -102,7 +114,6 @@ app.post("/addurl", async (req, res) => {
     response.message = constants.urlResponse.addSuccessful;
     response.data = await formatMongoData(newUrl);
   } catch (error) {
-
     console.log("error occured while adding url", error);
     response.message = constants.urlResponse.addUnsuccessful;
     response.Error = "error occured while adding Url";
