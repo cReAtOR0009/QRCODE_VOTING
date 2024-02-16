@@ -1,16 +1,25 @@
 import React, { useContext, useState } from "react";
 import axios from "axios"; // For making HTTP requests
 import { styles } from "../styles/styles";
-import { FormContext } from "../context/formContext";
+// import { FormContext } from "../context/formContext";
+import { qrCodeScannerContext } from "../context/qrCodeScannerContext";
 
 function VoterForm() {
-  const { formData, handleChange, handleSubmit } = useContext(FormContext);
+  const {
+    formData,
+    handleChange,
+    handleSubmit,
+    scanResult,
+    loading,
+    setLoading,
+  } = useContext(qrCodeScannerContext);
 
   return (
     <form
       // onSubmit={handleSubmit}
-      className={`${styles.container} flex flex-col gap-[20px]`}
+      className={` container flex flex-col justify-center items-center gap-[20px]`}
     >
+      <h1>Vote For your Favourite Performance!</h1>
       <div className="flex-col justify-between self-stretch gap-[30px]">
         <div className={`${""} flex flex-col flex-1  gap-[10px] md:gap-[16px]`}>
           <label htmlFor="fullName" className="text-[16px] text-black">
@@ -31,7 +40,7 @@ function VoterForm() {
             Phone:
           </label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             id="phone"
             name="phone"
@@ -121,6 +130,10 @@ function VoterForm() {
             <option value="contestant F">Contestant E</option>
           </select>
         </div>
+        <p className={`container whitespace-wrap  text-center `}>
+          QR CODE:
+          {scanResult}
+        </p>
         <div className="flex mt-[15px] flex-col sm:flex-z justify-end md:justify-center text-[right] my-[10px]">
           <button
             className={`${styles.buttonPadding} bg-Purple-60 text-[white] `}
@@ -130,6 +143,7 @@ function VoterForm() {
           </button>
         </div>
       </div>
+      {loading && <div className="loadingAnimation"></div>}
     </form>
   );
 }
