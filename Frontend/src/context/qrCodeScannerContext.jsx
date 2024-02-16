@@ -169,7 +169,7 @@ export const QrCodeScannerProvider = ({ children }) => {
 
    function onScanSuccess(decodedText, decodedResult) {
     // console.log(`Code matched = ${decodedText}`, decodedResult);
-    setScanResult(decodedText);
+    setScanResult(formerState => decodedText);
 
      handleSubmit(null);
     html5QrCode
