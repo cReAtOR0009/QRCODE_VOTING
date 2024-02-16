@@ -1,0 +1,123 @@
+<!-- Include Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Loading animation styles -->
+<style>
+  #loadingSpinner {
+    /* Hide the loading spinner by default */
+    display: none;
+    padding-top: 20px;
+    margin: 0 auto;
+    text-align: center;
+  }
+</style>
+
+<body>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-6 m-auto light">
+        <div class="card card-body text-center">
+          <h1 class="mb-3">
+            <img src="/assets/Logo.png" alt="icon" width="20%">
+          </h1>
+          <h2>Login</h2>
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="username">Email</label>
+              <input type="text" id="username" name="username" class="form-control" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="submitbtn">Login</button>
+            <!-- Loading spinner -->
+            <div id="loadingSpinner" class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include Axios for making AJAX requests -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- Include Toastify CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet">
+  <!-- Include Toastify JS -->
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <!-- Script for form submission handling -->
+  <script>
+    // Add event listener to form submission
+    document.getElementById('loginForm').addEventListener('submit', async function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Show loading spinner
+      document.getElementById('loadingSpinner').style.display = 'block';
+      const submitbtn = document.getElementById('submitbtn');
+      submitbtn.disabled = true;
+
+      // Get username and password from form fields
+      const username = document.querySelector("#username").value;
+      const password = document.querySelector("#password").value;
+
+      // Create a new FormData object and append form data
+      const formData = {
+        username: username,
+        password: password
+      };
+
+      try {
+        // Make AJAX request to login endpoint
+        const response = await axios.post('/admin/login', formData);
+
+        // Hide loading spinner
+        document.getElementById('loadingSpinner').style.display = 'none';
+        submitbtn.disabled = false;
+
+        // Redirect to dashboard upon successful login
+        window.location = "/admin/dashboard";
+
+        // Display success message using Toastify  
+        Toastify({
+          text: response.data.message,
+          duration: 3000,
+          close: true,
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+        }).showToast();
+
+      } catch (error) {
+        // Hide loading spinner
+        document.getElementById('loadingSpinner').style.display = 'none';
+        submitbtn.disabled = false;
+
+        // Display error message using Toastify
+        try {
+          const errorData = JSON.parse(error.response.data);
+          const errorMessage = errorData.error.message;
+
+          // Display error message using Toastify
+          Toastify({
+            text: errorMessage,
+            duration: 3000,
+            close: true,
+            backgroundColor: "linear-gradient(to right, #ff4b2b, #ff416c)",
+          }).showToast();
+        } catch (jsonError) {
+          // If the error response is not in JSON format, handle it directly
+          console.error("Non-JSON error:", error.response.data.error);
+          console.error("error", error);
+
+          // Display error message using Toastify
+          Toastify({
+            text: error.response.data.error,
+            duration: 3000,
+            close: true,
+            backgroundColor: "linear-gradient(to right, #ff4b2b, #ff416c)",
+          }).showToast();
+        }
+      }
+    });
+  </script>
+</body>

@@ -1,0 +1,30 @@
+<!-- login.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-6 m-auto light">
+        <div class="card card-body text-center">
+          <h1 class="mb-3">
+            <img src="/assets/Logo.png" alt="icon" width="20%">
+          </h1>
+          <h2>Welcome <%= user.username %></h2> <!-- Render the user's username -->
+          <p>Your ID: <%= user.id %></p> <!-- Render additional user data as needed -->
+          <a href="/admin/logout" class="btn btn-primary">Logout</a> <!-- Example logout link -->
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
