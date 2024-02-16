@@ -76,11 +76,16 @@ export const QrCodeScannerProvider = ({ children }) => {
 
     const updatedFormData = { ...formData, voteUrl: scanResult };
 
-    if ( !updatedFormData.voteUrl) {
-      console.log("kindly Ensure you fill all form fields correctly and scan a valid QRcode to Vote");
-      toast.error("kindly Ensure you fill all form fields correctly and scan a valid QRcode to Vote", {
-        autoClose: 3000,
-      });
+    if (!updatedFormData.voteUrl) {
+      console.log(
+        "kindly Ensure you fill all form fields correctly and scan a valid QRcode to Vote"
+      );
+      toast.error(
+        "kindly Ensure you fill all form fields correctly and scan a valid QRcode to Vote",
+        {
+          autoClose: 3000,
+        }
+      );
       setLoading(false); // Set loading state to false when form validation fails
       return;
     }
@@ -162,10 +167,14 @@ export const QrCodeScannerProvider = ({ children }) => {
       });
   }
 
-  function onScanSuccess(decodedText, decodedResult) {
+  async function onScanSuccess(decodedText, decodedResult) {
     // console.log(`Code matched = ${decodedText}`, decodedResult);
     setScanResult(decodedText);
-    handleSubmit(null);
+
+    // Wait for setScanResult to complete before proceeding
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    
+    await handleSubmit(null);
     html5QrCode
       .stop()
       .then((ignore) => {
