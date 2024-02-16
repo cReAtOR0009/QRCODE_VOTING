@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv").config();
-const Url = require("./database/models/urlModel");
+const VotingURL = require("./database/models/urlModel");
 const Vote = require("./database/models/voteModel");
 const dbConnection = require("./database/connection");
 const { formatMongoData } = require("./utilities/formatMongoData");
@@ -28,14 +28,14 @@ app.post("/", async (req, res) => {
       phone,
       faculty,
       level,
-      bestIndividualPerformance,
-      bestFaculty,
+      bestFacultyPerformance,
+      bestinduvidualPerformance,
       voteUrl,
     } = req.body;
 
     // check if url has been used before
     //check if url exist in db, then check status
-    const existingUrl = await Url.findOne({ url: voteUrl });
+    let existingUrl = await VotingURL.findOne({ url: voteUrl });
 
     //check if url exist in db
     if (!existingUrl) {
@@ -53,21 +53,57 @@ app.post("/", async (req, res) => {
       phone: phone,
       faculty: faculty,
       level: level,
-      bestFaculty: bestFaculty,
-      bestinduvidualPerformance: bestIndividualPerformance,
-      voteUrl: voteUrl,
+      bestFacultyPerformance: bestFacultyPerformance, 
+      bestinduvidualPerformance: bestinduvidualPerformance,
+      url: existingUrl.id,
     });
 
     await newVote.save();
+
+    await VotingURL.findByIdAndUpdate(
+      { _id: existingUrl.id },
+      { used: true,  vote: newVote.id },
+      {
+        new: true,
+      }
+    );
+
+    // existingUrl.used = true
+    // await existingUrl.save()
 
     response.status = 200;
     response.message = voteResponse.successfull;
     response.data = await formatMongoData(newVote);
   } catch (error) {
-    console.log("error occured while attpemting voting");
-    response.message = voteResponse.unSuccessfull;
-    response.data = await formatMongoData(newVote);
+    console.log("error occured while attpemting voting", error);
+    response.status = defaultServerResponse.status
+    response.message = voteResponse.unSuccessfull; 
+    response.data = {}
     response.Error = "error occured while attpemting voting";
+  } finally {
+    res.status(response.status).send(response);
+  }
+});
+
+app.post("/addurl", async (req, res) => {
+
+  let response = defaultServerResponse
+
+  try {
+
+    const { url } = req.body;
+    const newUrl = new VotingURL({ url: url });
+
+    await newUrl.save();
+
+    response.status = 200;
+    response.message = constants.urlResponse.addSuccessful;
+    response.data = await formatMongoData(newUrl);
+  } catch (error) {
+
+    console.log("error occured while adding url", error);
+    response.message = constants.urlResponse.addUnsuccessful;
+    response.Error = "error occured while adding Url";
   } finally {
     res.status(response.status).send(response);
   }

@@ -5,9 +5,9 @@ export const qrCodeScannerContext = createContext();
 
 export const QrCodeScannerProvider = ({ children }) => {
   const [cameraId, setCameraId] = useState(null);
-  const [scanResult, setScanResult] = useState(null); 
+  const [scanResult, setScanResult] = useState(null);
   const [voteValue, setVoteValue] = useState(null);
-  const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+  const config = { fps: 10, qrbox: { width: 200, height: 200 } };
   let html5QrCode;
 
   async function getCameras() {
@@ -18,10 +18,26 @@ export const QrCodeScannerProvider = ({ children }) => {
          * devices would be an array of objects of type:
          * { id: "id", label: "label" }
          */
+        // if (devices && devices.length) {
+        //   setCameraId(devices[0].id);
+        //   console.log(cameraId);
+        //   // .. use this to start scanning.
+        // }
+
         if (devices && devices.length) {
-          setCameraId(devices[0].id);
-          console.log(cameraId);
-          // .. use this to start scanning.
+          console.log(devices);
+          // Find the index of the back camera (usually the first device)
+          const backCameraIndex = devices.findIndex(
+            (device) =>
+              device.label.includes("back") || device.label.includes("rear")
+          );
+          if (backCameraIndex != -1) {
+            console.log("backCameraIndex", backCameraIndex);
+            setCameraId(devices[backCameraIndex].id);
+          } else {
+            // If back camera not found, use the first available camera
+            setCameraId(devices[0].id);
+          }
         }
       })
       .catch((err) => {
@@ -51,11 +67,11 @@ export const QrCodeScannerProvider = ({ children }) => {
 
   function startScan() {
     // html5QrCode = new Html5Qrcode(/* element id */ "reader");
-    getCameras();
+    // getCameras();
     html5QrCode
       .start(
         { deviceId: { exact: cameraId } },
-        config,
+        "",
         onScanSuccess,
         onScanFailure
       )
@@ -76,13 +92,28 @@ export const QrCodeScannerProvider = ({ children }) => {
         // Stop failed, handle it.
       });
   }
-  getCameras();
-   
+  // getCameras();
+
   useEffect(() => {
+    getCameras();
     html5QrCode = new Html5Qrcode(/* element id */ "reader");
     return () => {
       return html5QrCode;
     };
   });
-  return <qrCodeScannerContext.Provider value={{cameraId, setCameraId, scanResult, voteValue, setVoteValue, startScan, stopScan}}>{children}</qrCodeScannerContext.Provider>;
+  return (
+    <qrCodeScannerContext.Provider
+      value={{
+        cameraId,
+        setCameraId,
+        scanResult,
+        voteValue,
+        setVoteValue,
+        startScan,
+        stopScan,
+      }}
+    >
+      {children}
+    </qrCodeScannerContext.Provider>
+  );
 };

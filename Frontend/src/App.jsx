@@ -1,10 +1,17 @@
 import "./App.css";
 import { useContext } from "react";
 import { Html5Qrcode } from "html5-qrcode";
-import VoterForm from "./components/voteForm";
+// import VoterForm from "./components/VoteForm";
+import VoterForm from "./components/VoteForm";
 import Scanner from "./components/Scanner";
+// import Scanner2 from "./components/Scanner2";
+// import QrReader from "./components/Scanner3";
 import "bootstrap/dist/css/bootstrap.min.css";
+import GenerateQR from "./components/generateQR";
+import { urls } from "./qrCodes";
+// const { getDataArray } = require('.');
 
+// const dataArray = getDataArray();
 
 function App() {
   async function vote(url) {
@@ -32,10 +39,18 @@ function App() {
 
   return (
     <>
-      <h1>Frontend Voting</h1>
+      <h1>QrCode Voting</h1>
       <div>
         <VoterForm />
         <Scanner />
+        {/* <GenerateQR /> */}
+        <div className="qrcodeContainer">
+          {urls.map((url, index) => (
+            <GenerateQR key={index} value={url.url} index={index} />
+          ))}
+        </div>
+        {/* <Scanner2 /> */}
+        {/* <QrReader /> */}
       </div>
     </>
   );

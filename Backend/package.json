@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npm run dev",
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "urlseeder": " node ./database/seeder/DbSeeder.js"
   },
   "keywords": [
     "vote",
@@ -21,6 +22,7 @@
     "express": "^4.18.2"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "nodemon": "^3.0.3"
   }
 }

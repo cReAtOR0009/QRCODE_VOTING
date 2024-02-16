@@ -42,7 +42,7 @@ const voteSchema = new mongoose.Schema(
         "performance4",
         "performance5",
         "performance6",
-      ],
+      ], 
       required: true,
     },
     url: {
@@ -57,8 +57,8 @@ const voteSchema = new mongoose.Schema(
       transform: function (doc, ret, options) {
         ret.id = ret._id;
         delete ret._id;
-        delete ret._v;
-        return ret;
+        delete ret.__v;
+        return ret; 
       },
     },
   }

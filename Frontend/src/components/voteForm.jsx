@@ -19,7 +19,7 @@ function VoterForm() {
     e.preventDefault();
     try {
       // Send form data to the server
-      const response = await axios.post("/submit-form", formData);
+      const response = await axios.post("/", formData);
       console.log("Form submitted successfully:", response.data);
       // Optionally, reset the form fields after successful submission
       setFormData({
@@ -29,7 +29,7 @@ function VoterForm() {
         level: "",
         bestFaculty: "",
         bestIndividualPerformance: "",
-        voteUrl:""
+        voteUrl: "",
       });
     } catch (error) {
       console.error("Error submitting form:", error);
