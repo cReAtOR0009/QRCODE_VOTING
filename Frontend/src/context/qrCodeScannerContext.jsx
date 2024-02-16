@@ -167,11 +167,11 @@ export const QrCodeScannerProvider = ({ children }) => {
       });
   }
 
-  async function onScanSuccess(decodedText, decodedResult) {
+   function onScanSuccess(decodedText, decodedResult) {
     // console.log(`Code matched = ${decodedText}`, decodedResult);
     setScanResult(decodedText);
 
-    await handleSubmit(null);
+     handleSubmit(null);
     html5QrCode
       .stop()
       .then((ignore) => {
