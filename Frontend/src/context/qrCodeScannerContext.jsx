@@ -9,6 +9,7 @@ export const QrCodeScannerProvider = ({ children }) => {
   const [cameraId, setCameraId] = useState(null);
   const [scanResult, setScanResult] = useState("");
   const [voteValue, setVoteValue] = useState(null);
+  const [loading, setLoading] = useState(false);
   let html5QrCode;
 
   const [formData, setFormData] = useState({
@@ -23,6 +24,13 @@ export const QrCodeScannerProvider = ({ children }) => {
   const vote = async (formData, url) => {
     try {
       const response = await axios.post(url, formData);
+
+      if (response.data.Error !== "") {
+        console.log("Vote Unsuccessful:", response.data);
+        return toast.error(response.data.Error, {
+          autoClose: 3000,
+        });
+      }
       // Handle successful response
       console.log("Vote successful:", response.data);
       toast.success(response.data.message, {
@@ -63,11 +71,11 @@ export const QrCodeScannerProvider = ({ children }) => {
     if (e) {
       e.preventDefault();
     }
-    // console.log("scanresult", scanResult);
-    // console.log("submit clicked: formData", formData);
-    const updatedFormData = { ...formData, voteUrl: scanResult }; // Update formData with scanResult
 
-    // console.log("updatedFormData ", updatedFormData);
+    setLoading(true); // Set loading state to true when form submission starts
+
+    const updatedFormData = { ...formData, voteUrl: scanResult };
+
     if (
       !updatedFormData.fullName ||
       !updatedFormData.phone ||
@@ -78,14 +86,18 @@ export const QrCodeScannerProvider = ({ children }) => {
       !updatedFormData.voteUrl
     ) {
       console.log("Ensure all fields are correct");
-      return toast.error("Ensure all fields are correct", {
+      toast.error("Ensure all fields are correct", {
         autoClose: 3000,
       });
+      setLoading(false); // Set loading state to false when form validation fails
+      return;
     }
 
     try {
-      // Send form data to the server using the vote function
-      const response = await vote(updatedFormData, "https://qrvotingbackend.onrender.com/");
+      const response = await vote(
+        updatedFormData,
+        "https://qrvotingbackend.onrender.com/"
+      );
       setScanResult("");
       setFormData({
         fullName: "",
@@ -96,17 +108,24 @@ export const QrCodeScannerProvider = ({ children }) => {
         bestIndividualPerformance: "",
         url: "",
       });
+      setLoading(false); // Set loading state to false after successful form submission
+      toast.success(response.data.message, {
+        autoClose: 3000,
+      });
     } catch (error) {
-      if (error.response.data.Error) {
+      if (error.response && error.response.data.Error) {
         console.error("Error submitting form:", error.response.data.Error);
         toast.error(error.message, {
           autoClose: 3000,
         });
-      } 
-      toast.error(error.response.data.Error, {
-        autoClose: 3000,
-      });
-    } 
+      } else {
+        console.error("Unknown error occurred:", error);
+        toast.error("An unknown error occurred", {
+          autoClose: 3000,
+        });
+      }
+      setLoading(false); // Set loading state to false after an error occurs
+    }
   };
 
   async function getCameras() {
@@ -114,7 +133,7 @@ export const QrCodeScannerProvider = ({ children }) => {
     await Html5Qrcode.getCameras()
       .then((devices) => {
         if (devices && devices.length) {
-          console.log(devices);
+          // console.log(devices);
           // Find the index of the back camera (usually the first device)
           const backCameraIndex = devices.findIndex(
             (device) =>
@@ -135,7 +154,7 @@ export const QrCodeScannerProvider = ({ children }) => {
   }
 
   function onScanSuccess(decodedText, decodedResult) {
-    console.log(`Code matched = ${decodedText}`, decodedResult);
+    // console.log(`Code matched = ${decodedText}`, decodedResult);
     setScanResult(decodedText);
     handleSubmit(null);
     html5QrCode
@@ -184,6 +203,7 @@ export const QrCodeScannerProvider = ({ children }) => {
 
   useEffect(() => {
     getCameras();
+    console.log("re rendering page: useeffect");
     html5QrCode = new Html5Qrcode(/* element id */ "reader");
     return () => {
       return html5QrCode;
@@ -205,6 +225,8 @@ export const QrCodeScannerProvider = ({ children }) => {
         setVoteValue,
         startScan,
         stopScan,
+        loading,
+        setLoading,
       }}
     >
       {children}
