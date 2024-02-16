@@ -8,15 +8,15 @@ import {
   RouterProvider,
   createRoutesFromChildren,
 } from "react-router-dom";
-import VoterForm from "./components/VoteForm";
-import Scanner from "./components/Scanner";
+// import VoterForm from "./components/VoteForm";
+// import Scanner from "./components/Scanner";
 import "bootstrap/dist/css/bootstrap.min.css";
-import GenerateQR from "./components/generateQR";
+// import GenerateQR from "./components/generateQR";
 import { urls } from "./qrCodes";
-import NavBar from "./components/NavBar";
+// import NavBar from "./components/NavBar";
 import PageLayout from "./Layouts/PageLayout";
 import HomePage from "./pages/HomePage";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const router = createBrowserRouter(
