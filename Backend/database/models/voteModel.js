@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const voteSchema = new mongoose.Schema(
   {
-    fullName: String,
-    phone: String,
+    fullName: {type:String, required:true },
+    phone: {type:String, required:true },
     faculty: {
       type: String,
       enum: [
