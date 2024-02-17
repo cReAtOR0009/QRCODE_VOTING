@@ -7,7 +7,7 @@ export const qrCodeScannerContext = createContext();
 
 export const QrCodeScannerProvider = ({ children }) => {
   const [cameraId, setCameraId] = useState(null);
-  const [scanResult, setScanResult] = useState("");
+  const [scanResult, setScanResult] = useState("q32wefqwfqWF");
   const [voteValue, setVoteValue] = useState(null);
   const [loading, setLoading] = useState(false);
   let html5QrCode;
@@ -101,10 +101,10 @@ export const QrCodeScannerProvider = ({ children }) => {
     ) {
       console.log("Ensure all fields are correct");
       toast.error("Ensure all fields are correct", {
-        autoClose: 3000,
+        autoClose: 5000,
       });
       setLoading(false); // Set loading state to false when form validation fails
-      return;
+      return startScan();
     }
 
     try {
@@ -124,18 +124,18 @@ export const QrCodeScannerProvider = ({ children }) => {
       });
       setLoading(false); // Set loading state to false after successful form submission
       toast.success(response.data.message, {
-        autoClose: 3000,
+        autoClose: 5000,
       });
     } catch (error) {
       if (error.response && error.response.data.Error) {
         console.error("Error submitting form:", error.response.data.Error);
-        toast.error(error.message, {
-          autoClose: 3000,
+        toast.error(error.response.data.Error, {
+          autoClose: 5000,
         });
       } else {
         console.error("Unknown error occurred:", error);
         toast.error("An error occurred while attempting to cast a vote", {
-          autoClose: 3000,
+          autoClose: 5000,
         });
       }
       setLoading(false); // Set loading state to false after an error occurs
@@ -171,7 +171,7 @@ export const QrCodeScannerProvider = ({ children }) => {
     // console.log(`Code matched = ${decodedText}`, decodedResult);
     setScanResult(formerState => decodedText);
 
-     handleSubmit(null);
+    //  handleSubmit(null);
     html5QrCode
       .stop()
       .then((ignore) => {
