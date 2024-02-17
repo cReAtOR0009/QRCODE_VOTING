@@ -6,7 +6,7 @@ module.exports.formatMongoData = (data) => {
     if (Array.isArray(data)) {
         let convertedArray = [];
         for (value of data) {
-            console.log(value);
+            // console.log(value);
             convertedArray.push(value.toObject());
         }
         return convertedArray;
