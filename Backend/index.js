@@ -90,7 +90,7 @@ app.post("/", async (req, res) => {
     response.status = 200;
     response.message = voteResponse.successfull;
     response.data = await formatMongoData(newVote);
-    response.Error = "";
+    response.Error = null;
   } catch (error) {
     console.log("error occured while attpemting voting", error);
     response.status = defaultServerResponse.status;
