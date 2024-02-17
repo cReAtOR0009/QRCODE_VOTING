@@ -1,30 +1,299 @@
-<!-- login.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Dashboard</title>
+  <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Add your custom styles here */
+  </style>
 </head>
 
 <body>
-  <div class="container">
-    <div class="row mt-5">
-      <div class="col-md-6 m-auto light">
-        <div class="card card-body text-center">
-          <h1 class="mb-3">
-            <img src="/assets/Logo.png" alt="icon" width="20%">
-          </h1>
-          <h2>Welcome <%= user.username %></h2> <!-- Render the user's username -->
-          <p>Your ID: <%= user.id %></p> <!-- Render additional user data as needed -->
-          <a href="/admin/logout" class="btn btn-primary">Logout</a> <!-- Example logout link -->
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Left Sidebar -->
+      <div class="col-md-3">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active mb-3" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+          <a class="nav-link mb-3" id="v-pills-facultyvote-tab" data-toggle="pill" href="#v-pills-facultyvote" role="tab" aria-controls="v-pills-facultyvote" aria-selected="false">Faculty votes</a>
+          <a class="nav-link mb-3" id="v-pills-induvidualvotes-tab" data-toggle="pill" href="#v-pills-induvidualvotes" role="tab" aria-controls="v-pills-induvidualvotes" aria-selected="false">Individual votes</a>
+          <a class="nav-link mb-3" id="v-pills-allvotes-tab" data-toggle="pill" href="#v-pills-allvotes" role="tab" aria-controls="v-pills-allvotes" aria-selected="false">All votes</a>
+          <!-- Add more tabs as needed -->
+        </div>
+      </div>
+      <!-- Content -->
+      <div class="col-md-9">
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <!-- <h3>Home Content</h3> -->
+            <div class="card card-body text-center">
+              <h1 class="mb-3">
+                <img src="/assets/Logo.png" alt="icon" width="20%">
+              </h1>
+              <h2>Welcome <%= user.username %></h2> <!-- Render the user's username -->
+              <p>Your ID: <%= user.id %></p> <!-- Render additional user data as needed -->
+              <a href="/admin/logout" class="btn btn-primary">Logout</a> <!-- Example logout link -->
+            </div>
+            <!-- Add home content here -->
+          </div>
+          <div class="tab-pane fade" id="v-pills-facultyvote" role="tabpanel" aria-labelledby="v-pills-facultyvote-tab">
+            <h3>Faculty votes</h3>
+            <!-- Display faculty votes here -->
+            <div id="faculty-votes"></div>
+            <div id="total-faculty-votes"></div> <!-- Total faculty votes table will be rendered here -->
+          </div>
+          <div class="tab-pane fade" id="v-pills-induvidualvotes" role="tabpanel" aria-labelledby="v-pills-induvidualvotes-tab">
+            <h3>Individual votes</h3>
+            <!-- Display individual votes here -->
+            <div id="individual-votes"></div>
+            <div id="total-individual-votes"></div> <!-- Total individual votes table will be rendered here -->
+          </div>
+          <div class="tab-pane fade" id="v-pills-allvotes" role="tabpanel" aria-labelledby="v-pills-allvotes-tab">
+            <h3>All votes</h3>
+            <!-- Display all votes here -->
+            <ul id="all-votes"></ul>
+          </div>
+          <!-- Add more tab panes as needed -->
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script>
+    // Fetch individual votes
+    axios.get('/votes/faculty')
+      .then(response => {
+        const facultyVotesData = response.data.data;
+        renderFacultyVotesTables(facultyVotesData);
+        renderTotalFacultyVotesTable(facultyVotesData); // Render total faculty votes table
+      })
+      .catch(error => {
+        console.error('Error fetching faculty votes:', error);
+        const facultyVotesContainer = document.getElementById('faculty-votes');
+        facultyVotesContainer.innerHTML = '<p>Error fetching faculty votes. Please try again later.</p>';
+      });
+
+    axios.get('/votes/bestinduvidualperformance')
+      .then(response => {
+        const individualVotesData = response.data.data;
+        renderIndividualVotesTables(individualVotesData);
+        renderTotalIndividualVotesTable(individualVotesData); // Render total individual votes table
+      })
+      .catch(error => {
+        console.error('Error fetching individual votes:', error);
+        const individualVotesContainer = document.getElementById('individual-votes');
+        individualVotesContainer.innerHTML = '<p>Error fetching individual votes. Please try again later.</p>';
+      });
+
+    // Function to create rows for individual votes
+    function createIndividualVotesRows(votes) {
+      let rows = '';
+      votes.forEach(vote => {
+        rows += `
+      <tr>
+        <td>${vote.fullName}</td>
+        <td>${vote.phone}</td>
+        <td>${vote.faculty}</td>
+        <td>${vote.level}</td>
+        <td>${vote.bestFacultyPerformance}</td>
+        <td>${vote.bestIndividualPerformance}</td>
+        <td>${vote.createdAt}</td>
+        <td>${vote.updatedAt}</td>
+      </tr>
+    `;
+      });
+      return rows;
+    }
+
+    // Function to create HTML table for individual votes
+    function createIndividualVotesTable(contestant, votes) {
+      const tableRows = createIndividualVotesRows(votes);
+      return `
+    <h4>${contestant}</h4>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Phone</th>
+          <th>Faculty</th>
+          <th>Level</th>
+          <th>Best Faculty Performance</th>
+          <th>Best Individual Performance</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${tableRows}
+      </tbody>
+    </table>
+  `;
+    }
+
+    // Function to render HTML tables for individual votes
+    function renderIndividualVotesTables(individualVotesData) {
+      const individualVotesContainer = document.getElementById('individual-votes');
+      individualVotesData.forEach(contestant => {
+        const contestantName = Object.keys(contestant)[0];
+        const votes = contestant[contestantName];
+        const individualVotesTable = createIndividualVotesTable(contestantName, votes);
+        individualVotesContainer.innerHTML += individualVotesTable;
+      });
+    }
+
+    // Function to create HTML table rows for faculty votes
+    function createFacultyVotesRows(votes) {
+      let rows = '';
+      votes.forEach(vote => {
+        rows += `
+      <tr>
+        <td>${vote.fullName}</td>
+        <td>${vote.phone}</td>
+        <td>${vote.level}</td>
+        <td>${vote.bestIndividualPerformance}</td>
+        <td>${vote.createdAt}</td>
+        <td>${vote.updatedAt}</td>
+      </tr>
+    `;
+      });
+      return rows;
+    }
+
+    // Function to create HTML table for faculty votes
+    function createFacultyVotesTable(facultyName, votes) {
+      const tableRows = createFacultyVotesRows(votes);
+      return `
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Phone</th>
+          <th>Level</th>
+          <th>Best Individual Performance</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${tableRows}
+      </tbody>
+    </table>
+  `;
+    }
+
+    // Function to render HTML tables for faculty votes
+    function renderFacultyVotesTables(facultyVotesData) {
+      const facultyVotesContainer = document.getElementById('faculty-votes');
+      facultyVotesData.forEach(faculty => {
+        const facultyName = Object.keys(faculty)[0];
+        const votes = faculty[facultyName];
+        const facultyVotesTable = createFacultyVotesTable(facultyName, votes);
+        facultyVotesContainer.innerHTML += `<h4>${facultyName}</h4>` + facultyVotesTable;
+      });
+    }
+
+    // Function to calculate total individual votes
+    function calculateTotalIndividualVotes(individualVotesData) {
+      const totalIndividualVotes = {};
+      individualVotesData.forEach(contestant => {
+        const contestantName = Object.keys(contestant)[0];
+        totalIndividualVotes[contestantName] = contestant[contestantName].length;
+      });
+      return totalIndividualVotes;
+    }
+
+    // Function to create HTML table for total individual votes
+    function createTotalIndividualVotesTable(totalIndividualVotes) {
+      let tableRows = '';
+      for (const contestantName in totalIndividualVotes) {
+        tableRows += `
+      <tr>
+        <td>${contestantName}</td>
+        <td>${totalIndividualVotes[contestantName]}</td>
+      </tr>
+    `;
+      }
+      const totalIndividualVotesTable = `
+    <h4>Total Individual Votes</h4>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Contestant</th>
+          <th>Total Votes</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${tableRows}
+      </tbody>
+    </table>
+  `;
+      const totalIndividualVotesContainer = document.getElementById('total-individual-votes');
+      totalIndividualVotesContainer.innerHTML = totalIndividualVotesTable;
+    }
+
+    // Function to render total individual votes table
+    function renderTotalIndividualVotesTable(individualVotesData) {
+      const totalIndividualVotes = calculateTotalIndividualVotes(individualVotesData);
+      createTotalIndividualVotesTable(totalIndividualVotes);
+    }
+
+    // Function to calculate total faculty votes
+    function calculateTotalFacultyVotes(facultyVotesData) {
+      const totalFacultyVotes = {};
+      facultyVotesData.forEach(faculty => {
+        const facultyName = Object.keys(faculty)[0];
+        totalFacultyVotes[facultyName] = faculty[facultyName].length;
+      });
+      return totalFacultyVotes;
+    }
+
+    // Function to create HTML table for total faculty votes
+    function createTotalFacultyVotesTable(totalFacultyVotes) {
+      let tableRows = '';
+      for (const facultyName in totalFacultyVotes) {
+        tableRows += `
+      <tr>
+        <td>${facultyName}</td>
+        <td>${totalFacultyVotes[facultyName]}</td>
+      </tr>
+    `;
+      }
+      const totalFacultyVotesTable = `
+    <h4>Total Faculty Votes</h4>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Faculty</th>
+          <th>Total Votes</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${tableRows}
+      </tbody>
+    </table>
+  `;
+      const totalFacultyVotesContainer = document.getElementById('total-faculty-votes');
+      totalFacultyVotesContainer.innerHTML = totalFacultyVotesTable;
+    }
+
+    // Function to render total faculty votes table
+    function renderTotalFacultyVotesTable(facultyVotesData) {
+      const totalFacultyVotes = calculateTotalFacultyVotes(facultyVotesData);
+      createTotalFacultyVotesTable(totalFacultyVotes);
+    }
+  </script>
 </body>
 
 </html>
