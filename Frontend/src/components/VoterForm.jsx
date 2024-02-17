@@ -61,12 +61,23 @@ const VoterForm = () => {
             onChange={handleChange}
             required
           >
-            <option value="">Select your faculty</option>
-            <option value="faculty1">Faculty 1</option>
-            <option value="faculty2">Faculty 2</option>
-            <option value="faculty3">Faculty 3</option>
-            <option value="faculty4">Faculty 4</option>
-            <option value="faculty5">Faculty 5</option>
+            {/* "Faculty of Agriculture",
+        "Faculty of Art",
+        "Faculty of Education",
+        "Faculty of Environmental Design and Management",
+        "Faculty of Law",
+        "Faculty of Science",
+        "Faculty of The Social Sciences",
+        "Faculty of Administration and Management Sciences", */}
+            <option value="">Select Your Faculty</option>
+            <option value="Faculty of Agriculture">Faculty of Agriculture</option>
+            <option value="Faculty of Art">Faculty of Art</option>
+            <option value="Faculty of Education">Faculty of Education</option>
+            <option value="Faculty of Environmental Design and Management">Faculty of Environmental Design and Management</option>
+            <option value="Faculty of Law">Faculty of Law</option>
+            <option value="Faculty of Science">Faculty of Science</option>
+            <option value="Faculty of The Social Sciences">Faculty of The Social Sciences</option>
+            <option value="Faculty of Administration and Management Sciences">Faculty of Administration and Management Sciences</option>
           </select>
         </div>
         <div className="flex flex-col  mt-[15px] flex-1 gap-[10px] md:gap-[16px] ">
@@ -101,12 +112,15 @@ const VoterForm = () => {
             onChange={handleChange}
             required
           >
-            <option value="">Select best faculty Performance</option>
-            <option value="faculty1">Faculty 1</option>
-            <option value="faculty2">Faculty 2</option>
-            <option value="faculty3">Faculty 3</option>
-            <option value="faculty4">Faculty 4</option>
-            <option value="faculty5">Faculty 5</option>
+            <option value="">Vote Your Best Faculty Performance</option>
+            <option value="Faculty of Agriculture">Faculty of Agriculture</option>
+            <option value="Faculty of Art">Faculty of Art</option>
+            <option value="Faculty of Education">Faculty of Education</option>
+            <option value="Faculty of Environmental Design and Management">Faculty of Environmental Design and Management</option>
+            <option value="Faculty of Law">Faculty of Law</option>
+            <option value="Faculty of Science">Faculty of Science</option>
+            <option value="Faculty of The Social Sciences">Faculty of The Social Sciences</option>
+            <option value="Faculty of Administration and Management Sciences">Faculty of Administration and Management Sciences</option>
           </select>
         </div>
         <div className="flex flex-col mt-[15px]  flex-1 gap-[10px] md:gap-[16px] ">
@@ -121,7 +135,7 @@ const VoterForm = () => {
             onChange={handleChange}
             required
           >
-            <option value="">Select best individual performance</option>
+            <option value="">Vote Your Best individual performance</option>
             <option value="contestant 1">Contestant 1</option>
             <option value="contestant 2">Contestant 2</option>
             <option value="contestant 3">Contestant 3</option>
