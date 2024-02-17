@@ -9,7 +9,8 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #ffffff;
+  color: #1a1a1a;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,6 +19,17 @@
 }
 * {
   /* border: 1px solid #535bf2; */
+}
+
+.bgimage {
+  background: url("./assets//melodyofthespiritBig.jpg");
+  background-position: cover;
+  background-repeat: no-repeat;
+  background-size: 100vw 100%;
+  filter: blur(0.1px);
+  /* position: absolute; */
+  width: 100%;
+  height: 100%;
 }
 
 #reader {
@@ -49,8 +61,8 @@ body {
 }
 
 h1 {
-  font-size: 2.2em;
-  line-height: 1.1;
+  /* font-size: 2.2em;
+  line-height: 1.1; */
   text-align: center;
 }
 

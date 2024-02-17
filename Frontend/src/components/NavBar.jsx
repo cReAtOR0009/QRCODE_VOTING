@@ -25,7 +25,7 @@ const NavBar = () => {
         <a href="/" className="logo">
           <img src={logo} alt="BLW logo image" className="w-[50px] h-[auto]" />
         </a>
-        <ul className="hidden py-[10px] sm:flex justify-between items-center space-x-4">
+        {/* <ul className="hidden py-[10px] sm:flex justify-between items-center space-x-4">
           {navLinks.map((navlink, index) => (
             <li
               key={index}
@@ -102,8 +102,8 @@ const NavBar = () => {
           </div>
         ) : (
           ""
-        )}
-      </div>
+        )} */}
+      </div> 
     </nav>
   );
 };

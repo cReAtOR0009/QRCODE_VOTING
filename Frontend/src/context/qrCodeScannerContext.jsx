@@ -7,9 +7,7 @@ export const qrCodeScannerContext = createContext();
 
 export const QrCodeScannerProvider = ({ children }) => {
   const [cameraId, setCameraId] = useState(null);
-  const [scanResult, setScanResult] = useState(
-    ""
-  );
+  const [scanResult, setScanResult] = useState("");
   const [voteValue, setVoteValue] = useState(null);
   const [loading, setLoading] = useState(false);
   let html5QrCode;

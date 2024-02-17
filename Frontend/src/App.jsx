@@ -8,7 +8,7 @@ import {
   RouterProvider,
   createRoutesFromChildren,
 } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import PageLayout from "./Layouts/PageLayout";
 import HomePage from "./pages/HomePage";
 
