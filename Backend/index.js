@@ -9,6 +9,7 @@ const dbConnection = require("./database/connection");
 const { formatMongoData } = require("./utilities/formatMongoData");
 
 const adminRoutes = require("./routes/adminRoutes");
+const voteRoutes = require("./routes/votesRoute")
 
 const constants = require("./constants/index");
 const defaultServerResponse = constants.defaultServerResponse;
@@ -27,6 +28,7 @@ app.use(cookieParser());
 dbConnection();
 
 app.use("/admin", adminRoutes);
+app.use("/votes", voteRoutes)
 
 app.get("/", (req, res) => {
   res.json({ data: "server is working" });
@@ -63,7 +65,7 @@ app.post("/", async (req, res) => {
     }
     // create new vote in db
     const newVote = await new Vote({
-      fullName: fullName,
+      fullName: fullName,  
       phone: phone,
       faculty: faculty,
       level: level,
