@@ -75,7 +75,9 @@
     // Fetch individual votes
     axios.get('/votes/faculty')
       .then(response => {
-        const facultyVotesData = response.data.data;
+        const facultyVotesData = response.data.data; 
+        // console.log("facultyVotesData :", facultyVotesData)
+        // console.log("facultyVotesData :", facultyVotesData)
         renderFacultyVotesTables(facultyVotesData);
         renderTotalFacultyVotesTable(facultyVotesData); // Render total faculty votes table
       })
@@ -84,7 +86,7 @@
         const facultyVotesContainer = document.getElementById('faculty-votes');
         facultyVotesContainer.innerHTML = '<p>Error fetching faculty votes. Please try again later.</p>';
       });
-
+    
     axios.get('/votes/bestinduvidualperformance')
       .then(response => {
         const individualVotesData = response.data.data;
