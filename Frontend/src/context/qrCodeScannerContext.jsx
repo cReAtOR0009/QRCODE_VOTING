@@ -76,20 +76,6 @@ export const QrCodeScannerProvider = ({ children }) => {
 
     const updatedFormData = { ...formData, voteUrl: scanResult };
 
-    if (!updatedFormData.voteUrl) {
-      console.log(
-        "kindly Ensure you fill all form fields correctly and scan a valid QRcode to Vote"
-      );
-      toast.error(
-        "kindly Ensure you fill all form fields correctly and scan a valid QRcode to Vote",
-        {
-          autoClose: 3000,
-        }
-      );
-      setLoading(false); // Set loading state to false when form validation fails
-      return;
-    }
-
     if (
       !updatedFormData.fullName ||
       !updatedFormData.phone ||
@@ -99,10 +85,15 @@ export const QrCodeScannerProvider = ({ children }) => {
       !updatedFormData.bestIndividualPerformance ||
       !updatedFormData.voteUrl
     ) {
-      console.log("Ensure all fields are correct");
-      toast.error("Ensure all fields are correct", {
-        autoClose: 5000,
-      });
+      console.log(
+        "kindly Ensure you fill all form fields correctly and scan a valid QRcode to Vote"
+      );
+      toast.error(
+        "kindly Ensure you fill all form fields correctly and scan a valid QRcode to Vote",
+        {
+          autoClose: 5000,
+        }
+      );
       setLoading(false); // Set loading state to false when form validation fails
       return startScan();
     }
