@@ -1,24 +1,26 @@
 const VoteUrl = require("../models/urlModel");
 const { simpleFaker } = require("@faker-js/faker");
 const fs = require("fs");
-const {urls} = require("../../qrCodes")
+// const {urls} = require("../../qrCodes")
 
 module.exports.UrlSeeder = async function seed(seed_count = 50) {
   let FakeData = [];
-  console.log(urls[0])
+  // console.log(urls[0])
 
   // Generate fake data
   console.log("seeding db and generating urls")
-  // for (let i = 0; i < seed_count; i++) {
-  //   const url = simpleFaker.string.uuid();
-  //   const used = false;
-  //   FakeData.push({ url, used });
-  //   await this.addContentToArray( "urlData.json", { url }) // Save URL to file
-  // }
+  for (let i = 0; i < seed_count; i++) {
+    const url = simpleFaker.string.uuid();
+    const used = false;
+    FakeData.push({ url, used });
+    await this.addContentToArray( "urlData.json", { url }) // Save URL to file
+  }
 
+  console.log("url files created suceesfully")
   try {
     // Insert fake data into database
-    result = await VoteUrl.insertMany(urls);
+    result = await VoteUrl.insertMany(FakeData);
+    console.log("all files succesfully added to database")
   } catch (error) {
     console.log("error inserting to db", error);
   }
