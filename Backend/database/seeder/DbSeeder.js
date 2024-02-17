@@ -1,7 +1,8 @@
 const dotEnv = require("dotenv");
 dotEnv.config();
 // const VoteUrl = require("../models/urlModel")
-const UrlSeeder = require("./urlSeeder");
+const {UrlSeeder} = require("./urlSeeder");
+const {UrlDbSeeder} = require("./urlSeeder")
 const voteSeeder = require("./voteSeeder")
 const dbConnection = require("../connection");
 // const fs = require("fs")
@@ -9,7 +10,9 @@ const dbConnection = require("../connection");
 dbConnection();
 
 (async function () {
-  // await UrlSeeder.UrlSeeder(5000);
-  await voteSeeder.voteSeeder(20)
-  console.log("url seeder complete")
+  // await UrlSeeder.UrlSeeder(5000); 
+  // await voteSeeder.voteSeeder(20)
+  // await UrlDbSeeder() 
+  console.log("db seeded with url complete...Done!")
+  // console.log("url seeder complete")
 })();
