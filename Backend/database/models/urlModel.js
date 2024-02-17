@@ -13,9 +13,9 @@ const urlSchema = new mongoose.Schema(
     },
     vote: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Vote',
-      default:"65cc24a981edf0e6314980d2" 
-    }
+      ref: "Vote",
+      default: null,
+    },
   },
   {
     timestamps: true,
