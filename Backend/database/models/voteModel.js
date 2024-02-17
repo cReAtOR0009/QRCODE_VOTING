@@ -2,17 +2,19 @@ const mongoose = require("mongoose");
 
 const voteSchema = new mongoose.Schema(
   {
-    fullName: {type:String, required:true },
-    phone: {type:String, required:true },
+    fullName: { type: String, required: true },
+    phone: { type: String, required: true },
     faculty: {
       type: String,
       enum: [
-        "faculty1",
-        "faculty2",
-        "faculty3",
-        "faculty4",
-        "faculty5",
-        "faculty6",
+        "Faculty of Agriculture",
+        "Faculty of Art",
+        "Faculty of Education",
+        "Faculty of Environmental Design and Management",
+        "Faculty of Law",
+        "Faculty of Science",
+        "Faculty of The Social Sciences",
+        "Faculty of Administration and Management Sciences",
       ],
       required: true,
     },
@@ -24,12 +26,14 @@ const voteSchema = new mongoose.Schema(
     bestFacultyPerformance: {
       type: String,
       enum: [
-        "faculty1",
-        "faculty2",
-        "faculty3",
-        "faculty4",
-        "faculty5",
-        "faculty6",
+        "Faculty of Agriculture",
+        "Faculty of Art",
+        "Faculty of Education",
+        "Faculty of Environmental Design and Management",
+        "Faculty of Law",
+        "Faculty of Science",
+        "Faculty of The Social Sciences",
+        "Faculty of Administration and Management Sciences",
       ],
       required: true,
     },
@@ -56,14 +60,14 @@ const voteSchema = new mongoose.Schema(
         "contestant 18",
         "contestant 19",
         "contestant 20",
-      ], 
+      ],
       required: true,
     },
     url: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'VotingURL', // Reference to the URL schema
-        required: true
-      }
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "VotingURL", // Reference to the URL schema
+      required: true,
+    },
   },
   {
     timestamps: true,
@@ -72,7 +76,7 @@ const voteSchema = new mongoose.Schema(
         ret.id = ret._id;
         delete ret._id;
         delete ret.__v;
-        return ret; 
+        return ret;
       },
     },
   }

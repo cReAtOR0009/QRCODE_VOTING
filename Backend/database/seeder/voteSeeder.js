@@ -4,12 +4,14 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 
 const faculties = [
-  "faculty1",
-  "faculty2",
-  "faculty3",
-  "faculty4",
-  "faculty5",
-  "faculty6",
+  "Faculty of Agriculture",
+  "Faculty of Art",
+  "Faculty of Education",
+  "Faculty of Environmental Design and Management",
+  "Faculty of Law",
+  "Faculty of Science",
+  "Faculty of The Social Sciences",
+  "Faculty of Administration and Management Sciences",
 ];
 
 const individualPerformances = [
