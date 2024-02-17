@@ -11,7 +11,7 @@ const Scanner = () => {
       <div
         id="reader"
         style={{ width: "300px", height: "250px" }}
-        className="container"
+        className="container bgimage"
       ></div>
       <OperateQrScanner />
     </div>
