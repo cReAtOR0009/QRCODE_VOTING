@@ -6,16 +6,16 @@ import { logo, closeButton, openNavButton } from "../assets/importer";
 import { styles } from "../styles/styles";
 
 const NavBar = () => {
-  const { setNavActive, activeNav } = useContext(NavigationContext);
-  const [showNav, setShowNav] = useState(false);
+  // const { setNavActive, activeNav } = useContext(NavigationContext);
+  // const [showNav, setShowNav] = useState(false);
 
-  const navLinks = [
-    { title: "Home", id: "#home" },
-    { title: "Churches", id: "#churches" },
-    { title: "Events", id: "#events" },
-    { title: "Initiatives", id: "#initiatives" },
-    { title: "About us", id: "#about us" },
-  ];
+  // const navLinks = [
+  //   { title: "Home", id: "#home" },
+  //   { title: "Churches", id: "#churches" },
+  //   { title: "Events", id: "#events" },
+  //   { title: "Initiatives", id: "#initiatives" },
+  //   { title: "About us", id: "#about us" },
+  // ];
 
   return (
     <nav className={` bg-Grey-10 `}>
