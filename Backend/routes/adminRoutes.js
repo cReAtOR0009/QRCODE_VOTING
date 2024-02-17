@@ -83,9 +83,9 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-router.get("/signup", async (req, res) => {
-  res.render("signupUser");
-});
+// router.get("/signup", async (req, res) => {
+//   res.render("signupUser");
+// });
 router.get("/dashboard", authMiddleware, (req, res) => {
   return res.render("adminDashboard", { user: req.user });
 });
