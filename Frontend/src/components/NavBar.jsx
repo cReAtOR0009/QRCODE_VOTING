@@ -67,7 +67,7 @@ const NavBar = () => {
               </a>
 
               <div
-                className="text-[30px] cursor-pointer"
+                className="text-[30px] cursor-pointer text-white"
                 onClick={() => setShowNav(false)}
               >
                 x
@@ -78,7 +78,7 @@ const NavBar = () => {
               {navLinks.map((navlink, index) => (
                 <li
                   key={index}
-                  className={`w-[150px] my-[10px] text-center  ${
+                  className={`w-[150px] my-[10px] text-center no-underline ${
                     activeNav === navlink.id
                       ? "rounded-[8px]  bg-Purple-60 border border-Grey-15"
                       : ""
