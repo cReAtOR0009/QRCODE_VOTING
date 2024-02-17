@@ -110,24 +110,39 @@ const VoterForm = () => {
           </select>
         </div>
         <div className="flex flex-col mt-[15px]  flex-1 gap-[10px] md:gap-[16px] ">
-          <label htmlFor="bestinduvidualPerformance" className="text-[16px] ">
+          <label htmlFor="bestIndividualPerformance" className="text-[16px] ">
             Best Individual Performance:
           </label>
           <select
             className="form-select"
             id="bestIndividualPerformance"
-            name="bestinduvidualPerformance"
-            value={formData.bestinduvidualPerformance}
+            name="bestIndividualPerformance"
+            value={formData.bestIndividualPerformance}
             onChange={handleChange}
             required
           >
             <option value="">Select best individual performance</option>
-            <option value="contestant A">Contestant A</option>
-            <option value="contestant B">Contestant B</option>
-            <option value="contestant C">Contestant C</option>
-            <option value="contestant D">Contestant D</option>
-            <option value="contestant E">Contestant E</option>
-            <option value="contestant F">Contestant E</option>
+            <option value="contestant 1">Contestant 1</option>
+            <option value="contestant 2">Contestant 2</option>
+            <option value="contestant 3">Contestant 3</option>
+            <option value="contestant 4">Contestant 4</option>
+            <option value="contestant 5">Contestant 5</option>
+            <option value="contestant 6">Contestant 6</option>
+            <option value="contestant 7">Contestant 7</option>
+            <option value="contestant 8">Contestant 8</option>
+            <option value="contestant 9">Contestant 9</option>
+            <option value="contestant 10">Contestant 10</option>
+            <option value="contestant 11">Contestant 11</option>
+            <option value="contestant 12">Contestant 12</option>
+            <option value="contestant 13">Contestant 13</option>
+            <option value="contestant 14">Contestant 14</option>
+            <option value="contestant 15">Contestant 15</option>
+            <option value="contestant 16">Contestant 16</option>
+            <option value="contestant 17">Contestant 17</option>
+            <option value="contestant 18">Contestant 18</option>
+            <option value="contestant 19">Contestant 19</option>
+            <option value="contestant 20">Contestant 20</option>
+           
           </select>
         </div>
         <p className={`container whitespace-wrap  text-center `}>

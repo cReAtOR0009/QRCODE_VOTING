@@ -18,7 +18,7 @@ export const QrCodeScannerProvider = ({ children }) => {
     faculty: "",
     level: "",
     bestFacultyPerformance: "",
-    bestinduvidualPerformance: "",
+    bestIndividualPerformance: "",
     voteUrl: "",
   });
   const vote = async (formData, url) => {
@@ -96,7 +96,7 @@ export const QrCodeScannerProvider = ({ children }) => {
       !updatedFormData.faculty ||
       !updatedFormData.level ||
       !updatedFormData.bestFacultyPerformance ||
-      !updatedFormData.bestinduvidualPerformance ||
+      !updatedFormData.bestIndividualPerformance ||
       !updatedFormData.voteUrl
     ) {
       console.log("Ensure all fields are correct");
@@ -119,7 +119,7 @@ export const QrCodeScannerProvider = ({ children }) => {
         faculty: "",
         level: "",
         bestFacultyPerformance: "",
-        bestinduvidualPerformance: "",
+        bestIndividualPerformance: "",
         voteUrl: "",
       });
       setLoading(false); // Set loading state to false after successful form submission
