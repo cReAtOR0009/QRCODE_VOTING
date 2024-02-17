@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
 
 app.post("/", async (req, res) => {
   let response = defaultServerResponse;
-  console.log(req.body);
+
   try {
     //get form data from body
     const {
@@ -45,7 +45,7 @@ app.post("/", async (req, res) => {
       faculty,
       level,
       bestFacultyPerformance,
-      bestinduvidualPerformance,
+      bestIndividualPerformance,
       voteUrl,
     } = req.body;
 
@@ -70,7 +70,7 @@ app.post("/", async (req, res) => {
       faculty: faculty,
       level: level,
       bestFacultyPerformance: bestFacultyPerformance,
-      bestinduvidualPerformance: bestinduvidualPerformance,
+      bestIndividualPerformance: bestIndividualPerformance,
       url: existingUrl.id,
     });
 
