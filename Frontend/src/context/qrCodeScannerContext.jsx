@@ -95,7 +95,11 @@ export const QrCodeScannerProvider = ({ children }) => {
         }
       );
       setLoading(false); // Set loading state to false when form validation fails
-      return startScan();
+      if (updatedFormData.voteUrl) {
+        return;
+      } else {
+        return startScan();
+      }
     }
 
     try {
