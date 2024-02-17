@@ -7,7 +7,9 @@ export const qrCodeScannerContext = createContext();
 
 export const QrCodeScannerProvider = ({ children }) => {
   const [cameraId, setCameraId] = useState(null);
-  const [scanResult, setScanResult] = useState("");
+  const [scanResult, setScanResult] = useState(
+    ""
+  );
   const [voteValue, setVoteValue] = useState(null);
   const [loading, setLoading] = useState(false);
   let html5QrCode;
@@ -25,41 +27,20 @@ export const QrCodeScannerProvider = ({ children }) => {
     try {
       const response = await axios.post(url, formData);
 
-      if (response.data.Error !== "") {
-        console.log("Vote Unsuccessful:", response.data);
+      if (response.data.Error !== null) {
+        console.log("Vote Unsuccessful:", response.data.Error);
         return toast.error(response.data.Error, {
-          autoClose: 3000,
+          autoClose: 5000,
         });
       }
       // Handle successful response
       console.log("Vote successful:", response.data);
       toast.success(response.data.message, {
-        autoClose: 3000,
+        autoClose: 5000,
       });
       return response.data; // Optionally return data
     } catch (error) {
-      // Handle errors
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        console.log("Error message:", error.response.data);
-        toast.error(error.response.data.message, {
-          autoClose: 3000,
-        });
-      } else if (error.request) {
-        // The request was made but no response was received
-        console.log("No response received from the server");
-        toast.error("No response received from the server", {
-          autoClose: 3000,
-        });
-      } else {
-        // Something happened in setting up the request that triggered an error
-        console.error("Error setting up the request:", error.message);
-        toast.error(error.message, {
-          autoClose: 3000,
-        });
-      }
-      // Optionally re-throw the error to propagate it to the caller
-      throw error;
+      throw new Error(error);
     }
   };
 
@@ -118,21 +99,13 @@ export const QrCodeScannerProvider = ({ children }) => {
         voteUrl: "",
       });
       setLoading(false); // Set loading state to false after successful form submission
-      toast.success(response.data.message, {
+      console.log("response :", response);
+    } catch (error) {
+      console.log("errrror", error);
+      console.error("Error submitting form:", error.response.data.Error);
+      toast.error(error.response.data.Error, {
         autoClose: 5000,
       });
-    } catch (error) {
-      if (error.response && error.response.data.Error) {
-        console.error("Error submitting form:", error.response.data.Error);
-        toast.error(error.response.data.Error, {
-          autoClose: 5000,
-        });
-      } else {
-        console.error("Unknown error occurred:", error);
-        toast.error("An error occurred while attempting to cast a vote", {
-          autoClose: 5000,
-        });
-      }
       setLoading(false); // Set loading state to false after an error occurs
     }
   };
