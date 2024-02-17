@@ -21,23 +21,30 @@ export const QrCodeScannerProvider = ({ children }) => {
     bestIndividualPerformance: "",
     voteUrl: "",
   });
+
   const vote = async (formData, url) => {
     try {
       const response = await axios.post(url, formData);
 
       if (response.data.Error !== null) {
         console.log("Vote Unsuccessful:", response.data.Error);
-        return toast.error(response.data.Error, {
+        toast.error(response.data.Error, {
           autoClose: 5000,
         });
+      } else {
+        // Handle successful response
+        console.log("Vote successful:", response.data);
+        toast.success(response.data.message, {
+          autoClose: 5000,
+        });
+        // Optionally return data
+        return response.data;
       }
-      // Handle successful response
-      console.log("Vote successful:", response.data);
-      toast.success(response.data.message, {
-        autoClose: 5000,
-      });
-      return response.data; // Optionally return data
     } catch (error) {
+      // console.error("Error submitting form:", error.response.data.Error);
+      // toast.error(error.response.data.Error, {
+      //   autoClose: 5000,
+      // });
       throw new Error(error);
     }
   };
@@ -64,6 +71,7 @@ export const QrCodeScannerProvider = ({ children }) => {
       !updatedFormData.bestIndividualPerformance ||
       !updatedFormData.voteUrl
     ) {
+      console.log("updatedFormData", updatedFormData);
       console.log(
         "kindly Ensure you fill all form fields correctly and scan a valid QRcode to Vote"
       );
@@ -99,12 +107,12 @@ export const QrCodeScannerProvider = ({ children }) => {
       setLoading(false); // Set loading state to false after successful form submission
       console.log("response :", response);
     } catch (error) {
+      setLoading(false); // Set loading state to false after an error occurs
       console.log("errrror", error);
       console.error("Error submitting form:", error.response.data.Error);
       toast.error(error.response.data.Error, {
         autoClose: 5000,
       });
-      setLoading(false); // Set loading state to false after an error occurs
     }
   };
 
