@@ -11,8 +11,10 @@ dbConnection();
 
 (async function () {
   // await UrlSeeder.UrlSeeder(5000); 
-  // await voteSeeder.voteSeeder(20)
+  // await voteSeeder.voteSeeder(1000)
   // await UrlDbSeeder() 
-  console.log("db seeded with url complete...Done!")
+  // console.log("db seeded with url complete...Done!")
+  // console.log("db seeded with votes complete...Done!")
   // console.log("url seeder complete")
+  // console.log("votes seeder complete")
 })();
