@@ -7,7 +7,7 @@ module.exports = {
 
     voteResponse:{
         usedQRCode:"this QR Code has been used before",
-        wrongQRCode:"this QR Code dosent exist, kidly visit our stand to get a valid one",
+        wrongQRCode:"Opps...this QR Code dosent exist, kindly visit our stand to get a valid one",
         successfull:"voting SuccesFull",
         unSuccessfull:"voting unSuccessful"
     },
