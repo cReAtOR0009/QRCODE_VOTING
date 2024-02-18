@@ -8,9 +8,9 @@ export const qrCodeScannerContext = createContext();
 export const QrCodeScannerProvider = ({ children }) => {
   const [cameraId, setCameraId] = useState(null);
   const [scanResult, setScanResult] = useState("");
+  const [html5QrCode, setscannerState] = useState("");
   const [voteValue, setVoteValue] = useState(null);
   const [loading, setLoading] = useState(false);
-  let html5QrCode;
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -21,32 +21,31 @@ export const QrCodeScannerProvider = ({ children }) => {
     bestIndividualPerformance: "",
     voteUrl: "",
   });
-
-  const vote = async (formData, url) => {
-    try {
-      const response = await axios.post(url, formData);
-
-      if (response.data.Error !== null) {
-        console.log("Vote Unsuccessful:", response.data.Error);
-        toast.error(response.data.Error, {
-          autoClose: 5000,
+  const vote = (formData, url) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .post(url, formData)
+        .then((response) => {
+          if (response.data.Error !== null) {
+            console.log("Vote Unsuccessful:", response.data.Error);
+            toast.error(response.data.Error, {
+              autoClose: 5000,
+            });
+            reject(response.data.Error);
+          } else {
+            console.log("Vote successful:", response.data);
+            toast.success(response.data.message, {
+              autoClose: 5000,
+            });
+            resolve(response.data);
+          }
+        })
+        .catch((error) => {
+          setLoading(false);
+          console.error("Error in vote:", error);
+          reject(error);
         });
-      } else {
-        // Handle successful response
-        console.log("Vote successful:", response.data);
-        toast.success(response.data.message, {
-          autoClose: 5000,
-        });
-        // Optionally return data
-        return response.data;
-      }
-    } catch (error) {
-      // console.error("Error submitting form:", error.response.data.Error);
-      // toast.error(error.response.data.Error, {
-      //   autoClose: 5000,
-      // });
-      throw new Error(error);
-    }
+    });
   };
 
   const handleChange = (e) => {
@@ -61,6 +60,7 @@ export const QrCodeScannerProvider = ({ children }) => {
     setLoading(true); // Set loading state to true when form submission starts
 
     const updatedFormData = { ...formData, voteUrl: scanResult };
+    console.log(updatedFormData);
 
     if (
       !updatedFormData.fullName ||
@@ -71,7 +71,6 @@ export const QrCodeScannerProvider = ({ children }) => {
       !updatedFormData.bestIndividualPerformance ||
       !updatedFormData.voteUrl
     ) {
-      console.log("updatedFormData", updatedFormData);
       console.log(
         "kindly Ensure you fill all form fields correctly and scan a valid QRcode to Vote"
       );
@@ -107,10 +106,9 @@ export const QrCodeScannerProvider = ({ children }) => {
       setLoading(false); // Set loading state to false after successful form submission
       console.log("response :", response);
     } catch (error) {
-      setLoading(false); // Set loading state to false after an error occurs
-      console.log("errrror", error);
-      console.error("Error submitting form:", error.response.data.Error);
-      toast.error(error.response.data.Error, {
+      setLoading(false);
+      console.error("Error submitting form:", error);
+      toast.error("An error occurred while submitting the form", {
         autoClose: 5000,
       });
     }
@@ -172,7 +170,7 @@ export const QrCodeScannerProvider = ({ children }) => {
         onScanFailure
       )
       .catch((err) => {
-        // Start fa
+        console.log("error starting scanner");
       });
   }
 
@@ -191,13 +189,20 @@ export const QrCodeScannerProvider = ({ children }) => {
   // getCameras();
 
   useEffect(() => {
-    getCameras();
-    console.log("re rendering page: useeffect");
-    html5QrCode = new Html5Qrcode(/* element id */ "reader");
-    return () => {
+    // console.log("re rendering page: useeffect");
+    if (!html5QrCode || html5QrCode == null) {
+      let newScannerInstance = new Html5Qrcode(/* element id */ "reader");
+      setscannerState(newScannerInstance);
+    } else {
       return html5QrCode;
+    }
+    if (!cameraId || cameraId == null) {
+      getCameras();
+    }
+    return () => {
+      return { html5QrCode, cameraId };
     };
-  });
+  }, []);
   return (
     <qrCodeScannerContext.Provider
       value={{
