@@ -36,8 +36,13 @@ export const QrCodeScannerProvider = ({ children }) => {
       axios
         .post(url, formData)
         .then((response) => {
+          console.log("response :", response);
           if (response.data.Error !== null) {
-            console.log("Vote Unsuccessful:", response.data.Error);
+            console.log(
+              "Vote Unsuccessful: response",
+              response.data.Error
+            );
+            console.log("Vote Unsuccessful: response data", response.data);
             toast.error(response.data.Error, {
               autoClose: 5000,
             });
@@ -52,7 +57,10 @@ export const QrCodeScannerProvider = ({ children }) => {
         })
         .catch((error) => {
           setLoading(false);
-          console.error("Error in vote:", error);
+          console.error("Error in vote:", error.response.data);
+          toast.error(error.response.data.Error, {
+            autoClose: 5000,
+          });
           reject(error);
         });
     });
@@ -117,7 +125,7 @@ export const QrCodeScannerProvider = ({ children }) => {
       console.log("response :", response);
     } catch (error) {
       setLoading(false);
-      console.error("Error submitting form:", error);
+      console.error("Error submitting form:", error.response.data.Error);
       toast.error("An error occurred while submitting the form", {
         autoClose: 5000,
       });
