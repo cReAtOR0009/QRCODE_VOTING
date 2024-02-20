@@ -41,8 +41,13 @@
   place-items: center;
   position: relative;
   /* background: #703BF7; */
-  border: 1px solid #535bf2;
+  /* border: 1px solid #535bf2; */
   border-radius: 10px;
+}
+#reader div {
+  /* display: none; */
+  /* background: red; */
+  display: block;
 }
 
 #reader video {
