@@ -18,12 +18,12 @@ const NavBar = () => {
   // ];
 
   return (
-    <nav className={` bg-Grey-10 `}>
+    <nav className={`fixed`}>
       <div
-        className={`${styles.navContainer} bg-Grey-15 fixed top-0 z-20 w-full flex justify-between items-center`}
+        className={`${styles.navContainer} bg-[#6636e0] rounded-b-[10px] fixed top-0 z-20 w-full flex justify-between items-center`}
       >
         <a href="/" className="logo">
-          <img src={logo} alt="BLW logo image" className="w-[50px] h-[auto]" />
+          <img src={logo} alt="BLW logo image" className="w-[80px] h-[auto]" />
         </a>
         {/* <ul className="hidden py-[10px] sm:flex justify-between items-center space-x-4">
           {navLinks.map((navlink, index) => (
@@ -103,22 +103,9 @@ const NavBar = () => {
         ) : (
           ""
         )} */}
-      </div> 
+      </div>
     </nav>
   );
 };
 
 export default NavBar;
-
-<div className="adverts">
-  <div></div>
-  <div className="smallText1">
-    <p>✨Discover Your Dream Property with Estatein</p>
-    <a href="">
-      <button>Learn More</button>
-    </a>
-  </div>
-  <div>
-    <img src={closeButton} alt="close button" />
-  </div>
-</div>;

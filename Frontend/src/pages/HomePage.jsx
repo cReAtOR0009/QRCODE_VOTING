@@ -31,7 +31,7 @@ const HomePage = () => {
             <img
               src={programFlier}
               alt="program flier"
-              className="mt-[100px]  w-[100vw]"
+              className="mt-[85px]  w-[100vw]"
             />
           </div>
         </FormField>

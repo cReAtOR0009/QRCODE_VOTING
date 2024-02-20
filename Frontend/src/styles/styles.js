@@ -4,7 +4,7 @@ const styles = {
   homeheader: "px-[10px] md:px-[80px] xl:px-[162px] ",
   container: " mx-[20px] md:px-[20px]",
   navContainer:
-    "px-[16px] py-[30px]  md:px-[120px] md:py-[10px]  lg:pl[80px] lg:pt-[-100px] lg:pr-[80px]  xl:px-[400px] xl:py-[150px]",
+    "px-[10px] py-[10px]  md:px-[120px] md:py-[10px]  lg:pl[80px] lg:pt-[-100px] lg:pr-[80px]  xl:px-[400px] xl:py-[150px]",
   searchContainer:
     "px-[16px] py-[50px]  md:px-[80px] md:pt-[0px]  md:pb-[0px] lg:pl[80px] lg:pt-[-100px] lg:pr-[80px]  xl:px-[400px] xl:py-[150px] color-[red]",
   TextContainer:
