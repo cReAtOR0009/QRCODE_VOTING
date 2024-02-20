@@ -192,10 +192,12 @@ const VoterForm = () => {
             <option value="contestant 20">Contestant 20</option>
           </select>
         </div>
-        <p className={`container whitespace-wrap  text-center `}>
-          QR CODE:
-          {scanResult}
-        </p>
+        <div className="w-full max-w-[100vw]  flex-0 text-wrap">
+          <p className="container whitespace-pre-wrap text-center m-0">
+            QR CODE: {scanResult}
+          </p>
+        </div>
+
         <div className="flex mt-[15px] flex-col sm:flex-z justify-end md:justify-center text-[right] my-[10px]">
           <button
             className={`${styles.buttonPadding} bg-Purple-60 text-[white] `}
