@@ -44,11 +44,7 @@
   /* border: 1px solid #535bf2; */
   border-radius: 10px;
 }
-#reader div {
-  /* display: none; */
-  /* background: red; */
-  display: block;
-}
+
 
 #reader video {
   /* width: auto; */
