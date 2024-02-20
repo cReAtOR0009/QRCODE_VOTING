@@ -123,7 +123,7 @@ export const QrCodeScannerProvider = ({ children }) => {
     } catch (error) {
       setLoading(false);
       console.error("Error submitting form:", error.response.data.Error);
-      toast.error("An error occurred while submitting the form", {
+      toast.error("An error occurred while attempting to vote", {
         autoClose: 5000,
       });
     }
@@ -157,7 +157,7 @@ export const QrCodeScannerProvider = ({ children }) => {
   function onScanSuccess(decodedText, decodedResult) {
     // console.log(`Code matched = ${decodedText}`, decodedResult);
     setScanResult(decodedText);
-    toast.success("scan Successful!, proceed to submit", { autoClose: 3000 });
+    toast.success("scan Successful!, ensure you click submit to vote", { autoClose: 5000 });
     //  handleSubmit(null);
     html5QrCode
       .stop()
