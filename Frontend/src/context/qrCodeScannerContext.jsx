@@ -38,10 +38,7 @@ export const QrCodeScannerProvider = ({ children }) => {
         .then((response) => {
           console.log("response :", response);
           if (response.data.Error !== null) {
-            console.log(
-              "Vote Unsuccessful: response",
-              response.data.Error
-            );
+            console.log("Vote Unsuccessful: response", response.data.Error);
             console.log("Vote Unsuccessful: response data", response.data);
             toast.error(response.data.Error, {
               autoClose: 5000,
@@ -160,7 +157,7 @@ export const QrCodeScannerProvider = ({ children }) => {
   function onScanSuccess(decodedText, decodedResult) {
     // console.log(`Code matched = ${decodedText}`, decodedResult);
     setScanResult(decodedText);
-
+    toast.success("scan Successful!, proceed to submit", { autoClose: 3000 });
     //  handleSubmit(null);
     html5QrCode
       .stop()
