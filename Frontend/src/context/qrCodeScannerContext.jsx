@@ -175,7 +175,7 @@ export const QrCodeScannerProvider = ({ children }) => {
     html5QrCode
       .start(
         { deviceId: { exact: cameraId } },
-        // { fps: 10, qrbox: { width: 250, height: 750 } },
+        "",
         onScanSuccess,
         onScanFailure
       )
