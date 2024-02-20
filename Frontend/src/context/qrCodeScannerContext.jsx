@@ -11,6 +11,15 @@ export const QrCodeScannerProvider = ({ children }) => {
   const [html5QrCode, setscannerState] = useState("");
   const [voteValue, setVoteValue] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [displaySize, setDisplaySize] = useState({
+    width: 300,
+    height: 200,
+  });
+
+  const handleSizeChange = (e) => {
+    setDisplaySize({ ...displaySize, [e.target.name]: e.target.value });
+    // console.log(e.target.value)
+  };
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -21,6 +30,7 @@ export const QrCodeScannerProvider = ({ children }) => {
     bestIndividualPerformance: "",
     voteUrl: "",
   });
+
   const vote = (formData, url) => {
     return new Promise((resolve, reject) => {
       axios
@@ -165,7 +175,7 @@ export const QrCodeScannerProvider = ({ children }) => {
     html5QrCode
       .start(
         { deviceId: { exact: cameraId } },
-        "",
+        // { fps: 10, qrbox: { width: 250, height: 750 } },
         onScanSuccess,
         onScanFailure
       )
@@ -221,6 +231,9 @@ export const QrCodeScannerProvider = ({ children }) => {
         stopScan,
         loading,
         setLoading,
+        setDisplaySize,
+        displaySize,
+        handleSizeChange,
       }}
     >
       {children}
