@@ -157,7 +157,9 @@ export const QrCodeScannerProvider = ({ children }) => {
   function onScanSuccess(decodedText, decodedResult) {
     // console.log(`Code matched = ${decodedText}`, decodedResult);
     setScanResult(decodedText);
-    toast.success("scan Successful!, ensure you click submit to vote", { autoClose: 5000 });
+    toast.warn("scan Successful!, but ensure you click submit to cast your vote", {
+      autoClose: 5000,
+    });
     //  handleSubmit(null);
     html5QrCode
       .stop()
