@@ -55,7 +55,8 @@
           <div class="tab-pane fade" id="v-pills-allvotes" role="tabpanel" aria-labelledby="v-pills-allvotes-tab">
             <h3>All votes</h3>
             <!-- Display all votes here -->
-            <ul id="all-votes"></ul>
+            <div id="all-votes"></div>
+            <div id="all-faculty-votes"></div> <!-- Total individual votes table will be rendered here -->
           </div>
           <!-- Add more tab panes as needed -->
         </div>
@@ -75,7 +76,7 @@
     // Fetch individual votes
     axios.get('/votes/faculty')
       .then(response => {
-        const facultyVotesData = response.data.data; 
+        const facultyVotesData = response.data.data;
         // console.log("facultyVotesData :", facultyVotesData)
         // console.log("facultyVotesData :", facultyVotesData)
         renderFacultyVotesTables(facultyVotesData);
@@ -86,7 +87,46 @@
         const facultyVotesContainer = document.getElementById('faculty-votes');
         facultyVotesContainer.innerHTML = '<p>Error fetching faculty votes. Please try again later.</p>';
       });
+
+    axios.get('/votes/totalvotes')
+      .then(response => {
+        const totalVotes = response.data.data;
+        renderTotalVotes(totalVotes)
+
+      })
+
+      function renderTotalVotes(totalFacultyVotes) {
+    const voteTable = document.getElementById("all-faculty-votes");
+    let tableHeader = "";
+    let tableRows = "";
     
+    for (const totalFaculty of totalFacultyVotes) {
+        const facultyName = Object.keys(totalFaculty)[0];
+        const totalVotes = totalFaculty[facultyName];
+        
+        tableHeader += `<th>${facultyName}</th>`;
+        tableRows += `<td>${totalVotes}</td>`;
+    }
+    
+    let table = `
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    ${tableHeader}
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    ${tableRows}
+                </tr>
+            </tbody>
+        </table>
+    `;
+    
+    voteTable.innerHTML = table;
+}
+
+
     // axios.get('/votes/bestinduvidualperformance')
     //   .then(response => {
     //     const individualVotesData = response.data.data;

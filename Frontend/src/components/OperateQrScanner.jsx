@@ -14,6 +14,7 @@ const OperateQrScanner = () => {
         StartScan
       </button>
       <button
+        type="button"
         onClick={stopScan}
         className={`${styles.buttonPadding}  bg-Purple-60 text-[white] `}
       >

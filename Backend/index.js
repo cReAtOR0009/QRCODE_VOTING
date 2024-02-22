@@ -9,7 +9,7 @@ const dbConnection = require("./database/connection");
 const { formatMongoData } = require("./utilities/formatMongoData");
 
 const adminRoutes = require("./routes/adminRoutes");
-const voteRoutes = require("./routes/votesRoute")
+const voteRoutes = require("./routes/votesRoute");
 
 const constants = require("./constants/index");
 const defaultServerResponse = constants.defaultServerResponse;
@@ -28,7 +28,7 @@ app.use(cookieParser());
 dbConnection();
 
 app.use("/admin", adminRoutes);
-app.use("/votes", voteRoutes)
+app.use("/votes", voteRoutes);
 
 app.get("/", (req, res) => {
   res.json({ data: "server is working" });
@@ -39,14 +39,8 @@ app.post("/", async (req, res) => {
 
   try {
     //get form data from body
-    const {
-      fullName,
-      phone,
-      faculty,
-      level,
-      bestFacultyPerformance,
-      voteUrl,
-    } = req.body;
+    const { fullName, phone, faculty, level, bestFacultyPerformance, voteUrl } =
+      req.body;
 
     // check if url has been used before
     //check if url exist in db, then check status
