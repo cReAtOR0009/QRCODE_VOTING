@@ -8,7 +8,7 @@ const PageLayout = () => {
     <>
        <NavBar />
        <Outlet />
-       <Footer /> 
+       {/* <Footer />  */}
     </>
   )
 }

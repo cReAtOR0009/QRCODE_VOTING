@@ -20,8 +20,8 @@ const VoterForm = () => {
       // onSubmit={handleSubmit}
       className={` container flex flex-col justify-center items-center gap-[20px] md:gap-[50px] `}
     >
-      <h1 className="text-[20px] md:text-[50px] ">
-        Vote For your Favourite Performance!
+      <h1 className="text-[20px] md:text-[50px] text-Purple-60 bold">
+        VOTE FOR YOUR FAVOURITE FACULTY PERFORMANCE!
       </h1>
       <div className="flex-col  justify-between self-stretch gap-[50px] md:gap-[40px]">
         <div
