@@ -11,14 +11,14 @@ const OperateQrScanner = () => {
         onClick={startScan}
         className={`${styles.buttonPadding}  bg-Purple-60 text-[white] `}
       >
-        StartScan
+        StartScanner
       </button>
       <button
         type="button"
         onClick={stopScan}
         className={`${styles.buttonPadding}  bg-Purple-60 text-[white] `}
       >
-        StopScan
+        StopScanner
       </button>
     </div>
   );
