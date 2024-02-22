@@ -37,7 +37,7 @@ router.get("/faculty", authMiddleware, async (req, res) => {
         bestFacultyPerformance: allFaculty[index],
       });
       let formattedResult = await formatMongoData(facultyVotes);
-      console.log("facultyVotes: ", formattedResult);
+      // console.log("facultyVotes: ", formattedResult);
       votObject[allFaculty[index]] = formattedResult;
       votes.push(votObject);
     }
@@ -55,7 +55,36 @@ router.get("/faculty", authMiddleware, async (req, res) => {
     response.data = {};
     response.error = error.message;
   } finally {
-    res.status(response.status).send(response);
+    return res.status(response.status).send(response);
+  }
+});
+
+router.get("/totalvotes", authMiddleware, async (req, res) => {
+  let totalvotesArray = [];
+  let response = defaultServerResponse;
+
+  try {
+    for (let index = 0; index < allFaculty.length; index++) {
+      const currentFaculty = allFaculty[index];
+      let facultyVotes = await Vote.find({
+        bestFacultyPerformance: currentFaculty,
+      });
+      let TotalVotes = facultyVotes.length;
+      totalvotesArray.push({ [currentFaculty]: TotalVotes });
+    }
+    response.status = 200;
+    response.data = totalvotesArray;
+    response.Error = null;
+    response.message = "total votes fetched succesfully";
+  } catch (error) {
+    console.log(error);
+    console.log("something went wrong while fetching totalvotes data: ", error.message);
+    response.status = response.status;
+    response.message = "something went wrong while fetching totalvotes data";
+    response.data = {};
+    response.error = error.message;
+  } finally {
+    return res.status(response.status).send(response);
   }
 });
 
