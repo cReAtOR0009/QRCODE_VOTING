@@ -20,10 +20,14 @@ const NavBar = () => {
   return (
     <nav className={`fixed`}>
       <div
-        className={`${styles.navContainer} bg-[#6636e0] rounded-b-[10px] fixed top-0 z-20 w-[100vw] flex justify-between items-center`}
+        className={`${styles.navContainer} bg-[#6636e0] rounded-b-[10px] fixed top-0 z-20 w-[100vw] flex justify-start items-center`}
       >
         <a href="/" className="logo">
-          <img src={logo} alt="BLW logo image" className="w-[80px] h-[auto]" />
+          <img
+            src={logo}
+            alt="BLW logo image"
+            className="w-[80px] h-[auto] items-start"
+          />
         </a>
         {/* <ul className="hidden py-[10px] sm:flex justify-between items-center space-x-4">
           {navLinks.map((navlink, index) => (
