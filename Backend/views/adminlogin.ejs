@@ -105,13 +105,14 @@
             backgroundColor: "linear-gradient(to right, #ff4b2b, #ff416c)",
           }).showToast();
         } catch (jsonError) {
+          // console.log(jsonError)
           // If the error response is not in JSON format, handle it directly
-          console.error("Non-JSON error:", error.response.data.error);
-          console.error("error", error);
+          console.error("Non-JSON error:", jsonError.response.data.error);
+          console.error("error", jsonError);
 
           // Display error message using Toastify
           Toastify({
-            text: error.response.data.error,
+            text: jsonError.response.data.error,
             duration: 3000,
             close: true,
             backgroundColor: "linear-gradient(to right, #ff4b2b, #ff416c)",
