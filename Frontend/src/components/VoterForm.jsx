@@ -16,7 +16,7 @@ const VoterForm = () => {
   } = useContext(qrCodeScannerContext);
 
   return (
-    <form
+    <div
       // onSubmit={handleSubmit}
       className={` container flex flex-col justify-center items-center gap-[20px] md:gap-[50px] `}
     >
@@ -181,7 +181,7 @@ const VoterForm = () => {
         </div>
       </div>
       {loading && <div className="loadingAnimation"></div>}
-    </form>
+    </div>
   );
 };
 
