@@ -25,16 +25,16 @@ const HomePage = () => {
   return (
     <>
       {/* <Header /> */}
-      <div>
-        <FormField>
-          <div className="flex justify-center w-[100vw] self-strecth">
-            <img
-              src={programFlier}
-              alt="program flier"
-              className="mt-[85px]  w-[100vw]"
-            />
-          </div>
-        </FormField>
+      <div className="flex flex-col items-center">
+        {/* <FormField> */}
+        <div className="flex justify-center items-center w-[100vw] self-strecth">
+          <img
+            src={programFlier}
+            alt="program flier"
+            className="mt-[85px]  w-[100vw]"
+          />
+        </div>
+        <FormField />
         <VoterForm />
         <Scanner />
         <div className="flex justify-center w-[100vw] self-strecth">
