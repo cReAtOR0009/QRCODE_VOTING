@@ -45,7 +45,6 @@ app.post("/", async (req, res) => {
       faculty,
       level,
       bestFacultyPerformance,
-      bestIndividualPerformance,
       voteUrl,
     } = req.body;
 
@@ -70,7 +69,6 @@ app.post("/", async (req, res) => {
       faculty: faculty,
       level: level,
       bestFacultyPerformance: bestFacultyPerformance,
-      bestIndividualPerformance: bestIndividualPerformance,
       url: existingUrl.id,
     });
 

@@ -87,17 +87,17 @@
         facultyVotesContainer.innerHTML = '<p>Error fetching faculty votes. Please try again later.</p>';
       });
     
-    axios.get('/votes/bestinduvidualperformance')
-      .then(response => {
-        const individualVotesData = response.data.data;
-        renderIndividualVotesTables(individualVotesData);
-        renderTotalIndividualVotesTable(individualVotesData); // Render total individual votes table
-      })
-      .catch(error => {
-        console.error('Error fetching individual votes:', error);
-        const individualVotesContainer = document.getElementById('individual-votes');
-        individualVotesContainer.innerHTML = '<p>Error fetching individual votes. Please try again later.</p>';
-      });
+    // axios.get('/votes/bestinduvidualperformance')
+    //   .then(response => {
+    //     const individualVotesData = response.data.data;
+    //     renderIndividualVotesTables(individualVotesData);
+    //     renderTotalIndividualVotesTable(individualVotesData); // Render total individual votes table
+    //   })
+    //   .catch(error => {
+    //     console.error('Error fetching individual votes:', error);
+    //     const individualVotesContainer = document.getElementById('individual-votes');
+    //     individualVotesContainer.innerHTML = '<p>Error fetching individual votes. Please try again later.</p>';
+    //   });
 
     // Function to create rows for individual votes
     function createIndividualVotesRows(votes) {

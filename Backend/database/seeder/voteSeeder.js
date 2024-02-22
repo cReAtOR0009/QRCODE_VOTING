@@ -14,28 +14,7 @@ const faculties = [
   "Faculty of Administration and Management Sciences",
 ];
 
-const individualPerformances = [
-  "contestant 1",
-  "contestant 2",
-  "contestant 3",
-  "contestant 4",
-  "contestant 5",
-  "contestant 6",
-  "contestant 7",
-  "contestant 8",
-  "contestant 9",
-  "contestant 10",
-  "contestant 11",
-  "contestant 12",
-  "contestant 13",
-  "contestant 14",
-  "contestant 15",
-  "contestant 16",
-  "contestant 17",
-  "contestant 18",
-  "contestant 19",
-  "contestant 20",
-];
+
 const levels = [100, 200, 300, 400, 500];
 
 module.exports.voteSeeder = async (seed_count = 50) => {
@@ -46,9 +25,6 @@ module.exports.voteSeeder = async (seed_count = 50) => {
       const faculty = faker.helpers.arrayElement(faculties);
       const level = faker.helpers.arrayElement(levels);
       const bestFacultyPerformance = faker.helpers.arrayElement(faculties);
-      const bestIndividualPerformance = faker.helpers.arrayElement(
-        individualPerformances
-      );
       const url = new mongoose.Types.ObjectId(); // Generate a random ObjectId for URL
 
       const vote = new Vote({
@@ -57,7 +33,6 @@ module.exports.voteSeeder = async (seed_count = 50) => {
         faculty,
         level,
         bestFacultyPerformance,
-        bestIndividualPerformance,
         url,
       });
 

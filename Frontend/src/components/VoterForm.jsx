@@ -154,12 +154,13 @@ const VoterForm = () => {
             </option>
           </select>
         </div>
-       
+
         <div className="w-full max-w-[100vw]  flex-0 text-wrap">
           <input
             className="h-[40px] w-[100%] focus:border focus:text-Grey-08 focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
             type="text"
             value={scanResult}
+            readOnly
             // className="container"
             placeholder="kindly scan a qrcode to fill here, you cant fill manually"
           />
