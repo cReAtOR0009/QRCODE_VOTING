@@ -8,6 +8,7 @@ export const qrCodeScannerContext = createContext();
 export const QrCodeScannerProvider = ({ children }) => {
   const [cameraId, setCameraId] = useState(null);
   const [scanResult, setScanResult] = useState("");
+  const [display, setDisplay] = useState(false);
   const [html5QrCode, setscannerState] = useState("");
   const [voteValue, setVoteValue] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -153,8 +154,9 @@ export const QrCodeScannerProvider = ({ children }) => {
 
   function onScanSuccess(decodedText, decodedResult) {
     // console.log(`Code matched = ${decodedText}`, decodedResult);
+    setDisplay(false)
     setScanResult(decodedText);
-    toast.warn("scan Successful!, but ensure you click submit to cast your vote", {
+    toast.warn("scan Successful!, but ensure you click Cast Vote to submit vote", {
       autoClose: 5000,
     });
     //  handleSubmit(null);
@@ -176,6 +178,7 @@ export const QrCodeScannerProvider = ({ children }) => {
   }
 
   function startScan() {
+    setDisplay(true)
     html5QrCode
       .start(
         { deviceId: { exact: cameraId } },
@@ -189,6 +192,7 @@ export const QrCodeScannerProvider = ({ children }) => {
   }
 
   function stopScan() {
+    setDisplay(false)
     html5QrCode
       .stop()
       .then((ignore) => {
@@ -238,6 +242,7 @@ export const QrCodeScannerProvider = ({ children }) => {
         setDisplaySize,
         displaySize,
         handleSizeChange,
+        display
       }}
     >
       {children}
