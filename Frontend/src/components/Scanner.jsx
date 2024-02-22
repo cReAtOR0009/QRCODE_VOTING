@@ -4,7 +4,8 @@ import { styles } from "../styles/styles";
 import OperateQrScanner from "./OperateQrScanner";
 
 const Scanner = () => {
-  const { displaySize, handleSizeChange } = useContext(qrCodeScannerContext);
+  const { displaySize, handleSizeChange, handleSubmit } =
+    useContext(qrCodeScannerContext);
   const { width, height } = displaySize;
 
   return (
@@ -13,12 +14,20 @@ const Scanner = () => {
         id="reader"
         style={{ width: `${width}px`, height: `${height}px` }}
         // className="container bgimage"
-      ></div>
-      <OperateQrScanner />
+      >
+        click startscan to show scanner here
+      </div>
+      <div className="flex justify-center">
+        <button
+          className={`${styles.buttonPadding} bg-Purple-60 text-[white] my-[20px]`}
+          onClick={handleSubmit}
+        >
+          cast Vote
+        </button>
+      </div>
       <p className="text-center text-Purple-60">Adjust Scanner Size Here</p>
       <div className="flex justify-center items-center text-Purple-60 py-[10px] px-[20px]">
         <input
-          // className=" h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
           type="range"
           id="volume"
           name="width"
@@ -28,16 +37,6 @@ const Scanner = () => {
           onChange={handleSizeChange}
         />
       </div>
-      {/* <input
-        className=""
-        type="range"
-        id="volume"
-        name="height"
-        min="100"
-        max="500"
-        value={displaySize.height}
-        onChange={handleSizeChange}
-      /> */}
     </div>
   );
 };

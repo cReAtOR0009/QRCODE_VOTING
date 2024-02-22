@@ -38,9 +38,9 @@ const HomePage = () => {
         <VoterForm />
         <Scanner />
         <div className="flex justify-center w-[100vw] self-strecth">
-          <FormField>
-            <img src={serviceFlier} alt="service flier" className="w-[100vw]" />
-          </FormField>
+          {/* <FormField> */}
+          <img src={serviceFlier} alt="service flier" className="w-[100vw]" />
+          {/* </FormField> */}
         </div>
       </div>
     </>

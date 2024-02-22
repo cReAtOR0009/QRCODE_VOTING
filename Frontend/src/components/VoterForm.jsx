@@ -3,7 +3,7 @@ import axios from "axios"; // For making HTTP requests
 import { styles } from "../styles/styles";
 // import { FormContext } from "../context/formContext";
 import { qrCodeScannerContext } from "../context/qrCodeScannerContext";
-import programFlier2 from "../assets/melodyofthespirit.jpg";
+import OperateQrScanner from "./OperateQrScanner";
 
 const VoterForm = () => {
   const {
@@ -193,18 +193,27 @@ const VoterForm = () => {
           </select>
         </div>
         <div className="w-full max-w-[100vw]  flex-0 text-wrap">
-          <p className="container whitespace-pre-wrap text-center m-0">
+          <input
+            className="h-[40px] w-[100%] focus:border focus:text-Grey-08 focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
+            type="text"
+            value={scanResult}
+            // className="container"
+            placeholder="kindly scan a qrcode to fill here, you cant fill manually"
+          />
+          {/* <p className=" whitespace-pre-wrap text-center m-0">
+            
             QR CODE: {scanResult}
-          </p>
+          </p> */}
         </div>
 
         <div className="flex mt-[15px] flex-col sm:flex-z justify-end md:justify-center text-[right] my-[10px]">
-          <button
+          <OperateQrScanner />
+          {/* <button
             className={`${styles.buttonPadding} bg-Purple-60 text-[white] `}
             onClick={handleSubmit}
           >
             submit
-          </button>
+          </button> */}
         </div>
       </div>
       {loading && <div className="loadingAnimation"></div>}

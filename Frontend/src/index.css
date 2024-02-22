@@ -34,19 +34,21 @@
 
 #reader {
   /* margin-block: 20px; */
+  text-align: center;
   margin: 0 auto;
   width: auto;
   height: auto;
   display: flex;
   place-items: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: auto;
   position: relative;
   /* background: #703BF7; */
   /* border: 1px solid #535bf2; */
   border-radius: 10px;
 }
 
-
-  
 #reader video {
   /* width: auto; */
   /* height: auto; */
