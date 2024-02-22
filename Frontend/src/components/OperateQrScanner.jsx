@@ -7,6 +7,7 @@ const OperateQrScanner = () => {
   return (
     <div className={`  flex justify-center items-center gap-[20px]`}>
       <button
+        type="button"
         onClick={startScan}
         className={`${styles.buttonPadding}  bg-Purple-60 text-[white] `}
       >
