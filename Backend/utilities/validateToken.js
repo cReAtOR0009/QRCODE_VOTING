@@ -6,7 +6,7 @@ module.exports.authMiddleware = async (req, res, next) => {
     // Check if the token exists in the request headers
     // const token = req.headers.authorization;
     const token = req.cookies.token;
-    console.log("token: ", token);
+    // console.log("token: ", token);
 
     if (!token) {
       throw new Error("Authorization token is missing");

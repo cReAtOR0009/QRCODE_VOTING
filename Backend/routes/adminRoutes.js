@@ -9,13 +9,13 @@ const { formatMongoData } = require("../utilities/formatMongoData");
 
 const User = require("../database/models/userModel");
 
-router.get("/login", async (req, res) => {
+router.get("/login", async (req, res) => { 
   res.render("adminlogin");
 });
 
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
 
   try {
     const existingUser = await User.findOne({ username });
@@ -56,7 +56,7 @@ router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // Check if the username already exists
+    // Check if the username already exists 
     const existingUser = await User.findOne({ username });
     if (existingUser) {
       return res.status(400).json({ error: "Username already exists" });
@@ -83,9 +83,11 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// router.get("/signup", async (req, res) => {
-//   res.render("signupUser");
-// });
+router.get("/signup", async (req, res) => {
+  res.render("signupUser");
+});
+
+
 router.get("/dashboard", authMiddleware, (req, res) => {
   return res.render("adminDashboard", { user: req.user });
 });
