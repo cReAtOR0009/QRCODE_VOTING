@@ -35,7 +35,7 @@ const VoterForm = () => {
           </label>
           <input
             type="text"
-            className="h-[40px] focus:border focus:text-Grey-08 focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
+            className="h-[40px]  text-[#4e52b9]  focus:text-[#605ce8] focus:border focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
             id="fullName"
             name="fullName"
             placeholder="kindly fill your full name here"
@@ -52,7 +52,7 @@ const VoterForm = () => {
           </label>
           <input
             type="number"
-            className="h-[40px] focus:border focus:text-Grey-08 focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
+            className="h-[40px] focus:border  text-[#4e52b9]  focus:text-[#605ce8] focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
             id="phone"
             name="phone"
             placeholder="kindly fill your phone number"
@@ -66,7 +66,7 @@ const VoterForm = () => {
             Faculty:
           </label>
           <select
-            className="h-[40px] focus:border focus:text-Grey-08 focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
+            className="h-[40px] focus:border text-[#4e52b9]  focus:text-[#605ce8] focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
             id="faculty"
             name="faculty"
             value={formData.faculty}
@@ -105,7 +105,7 @@ const VoterForm = () => {
             Level:
           </label>
           <select
-            className="h-[40px] focus:border focus:text-Grey-08 focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
+            className="h-[40px] focus:border  text-[#4e52b9]  focus:text-[#605ce8] focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
             id="level"
             name="level"
             value={formData.level}
@@ -128,7 +128,7 @@ const VoterForm = () => {
             Best Faculty Performance:
           </label>
           <select
-            className="h-[40px] focus:border focus:text-Grey-08 focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
+            className="h-[40px] focus:border  text-[#4e52b9]  focus:text-[#605ce8] focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
             id="bestFacultyPerformance"
             name="bestFacultyPerformance"
             value={formData.bestFacultyPerformance}
@@ -157,30 +157,21 @@ const VoterForm = () => {
 
         <div className="w-full max-w-[100vw]  flex-0 text-wrap">
           <input
-            className="h-[40px] w-[100%] focus:border focus:text-Grey-08 focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
+            className="h-[40px] w-[100%]  text-[#4e52b9]  focus:text-[#605ce8] focus:border focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
             type="text"
             value={scanResult}
             readOnly
             // className="container"
             placeholder="kindly scan a qrcode to fill here, you cant fill manually"
           />
-          {/* <p className=" whitespace-pre-wrap text-center m-0">
-            
-            QR CODE: {scanResult}
-          </p> */}
         </div>
 
         <div className="flex mt-[15px] flex-col sm:flex-z justify-end md:justify-center text-[right] my-[10px]">
           <OperateQrScanner />
-          {/* <button
-            className={`${styles.buttonPadding} bg-Purple-60 text-[white] `}
-            onClick={handleSubmit}
-          >
-            submit
-          </button> */}
         </div>
       </div>
       {loading && <div className="loadingAnimation"></div>}
+      
     </div>
   );
 };
