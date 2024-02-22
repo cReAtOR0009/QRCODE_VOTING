@@ -154,44 +154,7 @@ const VoterForm = () => {
             </option>
           </select>
         </div>
-        <div className="flex flex-col mt-[15px]  flex-1 mb-[10px] gap-[5px] md:gap-[16px]">
-          <label
-            htmlFor="bestIndividualPerformance"
-            className="text-[20px] text-Purple-60"
-          >
-            Best Individual Performance:
-          </label>
-          <select
-            className="h-[40px] focus:border focus:text-Grey-08 focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
-            id="bestIndividualPerformance"
-            name="bestIndividualPerformance"
-            value={formData.bestIndividualPerformance}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Vote Your Best individual performance</option>
-            <option value="contestant 1">Contestant 1</option>
-            <option value="contestant 2">Contestant 2</option>
-            <option value="contestant 3">Contestant 3</option>
-            <option value="contestant 4">Contestant 4</option>
-            <option value="contestant 5">Contestant 5</option>
-            <option value="contestant 6">Contestant 6</option>
-            <option value="contestant 7">Contestant 7</option>
-            <option value="contestant 8">Contestant 8</option>
-            <option value="contestant 9">Contestant 9</option>
-            <option value="contestant 10">Contestant 10</option>
-            <option value="contestant 11">Contestant 11</option>
-            <option value="contestant 12">Contestant 12</option>
-            <option value="contestant 13">Contestant 13</option>
-            <option value="contestant 14">Contestant 14</option>
-            <option value="contestant 15">Contestant 15</option>
-            <option value="contestant 16">Contestant 16</option>
-            <option value="contestant 17">Contestant 17</option>
-            <option value="contestant 18">Contestant 18</option>
-            <option value="contestant 19">Contestant 19</option>
-            <option value="contestant 20">Contestant 20</option>
-          </select>
-        </div>
+       
         <div className="w-full max-w-[100vw]  flex-0 text-wrap">
           <input
             className="h-[40px] w-[100%] focus:border focus:text-Grey-08 focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
