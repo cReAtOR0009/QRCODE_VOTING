@@ -5,7 +5,7 @@ import programFlier from "../assets/melodyofthespiritBig.jpg";
 const Header = () => {
   //bg-heroGradient fullb
   return (
-      <section className={`${styles.container}  z-10 flex sm:flex-nowrap flex-wrap justify-between items-center h-[100vh] mt-24 bg-heroGradient fullbg text-[white]`}> 
+      <section className={`${styles.container}  z-10 flex sm:flex-nowrap flex-wrap justify-between items-center h-[100vh] mt-24 bg-heroGradient fullbg text-[white] md:bg-heroGradientLarge`}> 
         <div className=" flex flex-col gap-4 w-[100vw] md:w-[100vw] ">
           <h1 className={`${styles.h1} text-[40px] text-[white] text-left`}>
            Melody Of The Spirit

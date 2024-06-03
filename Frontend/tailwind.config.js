@@ -1,3 +1,4 @@
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{js,jsx}"],
@@ -50,6 +51,9 @@ export default {
       backgroundImage:{
         heroGradient:
         "linear-gradient(91deg, rgb(18 12 1 / 70%), rgb(0 0 0 / 40%)), url(/src/assets/melodyofthespirit.jpg)",
+        heroGradientLarge:
+        "linear-gradient(91deg, rgb(22 108 215 / 70%), rgb(244 244 244 / 40%))",
+        VoterFormbg:"linear-gradient(91deg, rgb(22 108 215 / 70%), rgb(244 244 244 / 40%))"
       },
       fontSize: {
         xxs: "0.625rem", // 10px

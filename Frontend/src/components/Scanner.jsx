@@ -9,7 +9,7 @@ const Scanner = () => {
   const { width, height } = displaySize;
 
   return (
-    <div>
+    <div className="bg-VoterFormbg">
       <div
         id="reader"
         style={{
