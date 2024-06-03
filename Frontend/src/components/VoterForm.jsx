@@ -18,7 +18,8 @@ const VoterForm = () => {
   return (
     <div
       // onSubmit={handleSubmit}
-      className={` container flex flex-col justify-center items-center gap-[20px] md:gap-[50px] `}
+      id="voteform"
+      className={` ${styles.container} flex flex-col justify-center items-center gap-[20px] md:gap-[50px] `}
     >
       <h1 className="text-[20px] md:text-[50px] text-Purple-60 font-medium">
         VOTE FOR YOUR FAVOURITE FACULTY PERFORMANCE!

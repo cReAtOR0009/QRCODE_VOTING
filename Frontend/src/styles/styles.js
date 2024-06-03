@@ -1,8 +1,12 @@
 import { Container } from "postcss";
 
 const styles = {
+  container: "px-4 py-6 sm:px-10 md:py-10  lg:p-20 xl:p-20 ",
+  h1: "text-3xl md:text-4xl lg:4xl xl:text-5xl font-bold text-white leading-tight",
+  h2: "text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-semibold leading-snug text-secondary2",
+  h3: "text-xl md:text-2xl lg:text-2xl xl:text-2xl font-medium leading-normal",
+  h4: "text-base md:text-xl lg:text-xl xl:text-xl font-medium leading-normal",
   homeheader: "px-[10px] md:px-[80px] xl:px-[162px] ",
-  container: " mx-[20px] md:px-[20px]",
   navContainer:
     "px-[10px] py-[10px]  md:px-[120px] md:py-[10px]  lg:pl[80px] lg:pt-[-100px] lg:pr-[80px]  xl:px-[400px] xl:py-[150px]",
   searchContainer:

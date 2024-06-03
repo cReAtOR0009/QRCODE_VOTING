@@ -19,33 +19,59 @@ export default {
       // => @media (min-width: 1536px) { ... }
     },
     colors: {
-      "Purple-60": "#703bf7",
-      "Purple-65": "#8254f8",
-      "Purple-70": "#946cf9",
-      "Purple-75": "#a685fa",
-      "Purple-90": "#dbcefd",
-      "Purple-95": "#ede7fe",
-      "Purple-97": "#f4f0fe",
-      "Purple-99": "#fbfaff",
-      "Grey-08": "#141414",
-      "Grey-10": "#1A1A1A",
-      "Grey-15": "#262626",
-      "Grey-20": "#333",
-      "Grey-30": "#4d4d4d",
-      "Grey-40": "#666666",
-      "Grey-50": "#808080",
-      "Grey-60": "#999999",
-      "White-90": "#e4e4e7",
-      "White-95": "#f1f1f3",
-      "White-97": "#f7f7f8",
-      "White-99": "#fcfcfd",
+     
     },
 
     fontFamily: {
       // sans: ['Graphik', 'sans-serif'],
       // serif: ['Merriweather', 'serif'],
     },
-    extend: {},
+    fontSize: {
+      xxs: "0.625rem", // 10px
+      xs: "0.75rem", // 12px
+      sm: "0.875rem", // 14px
+      base: "1rem", // 16px
+      lg: "1.125rem", // 18px
+      xl: "1.25rem", // 20px
+      "2xl": "1.5rem", // 24px
+      "3xl": "1.875rem", // 30px
+      "4xl": "2.25rem", // 36px
+      "5xl": "3rem", // 48px
+      "6xl": "3.75rem", // 60px
+      "7xl": "4.5rem", // 72px
+      "8xl": "6rem", // 96px
+      "9xl": "8rem", // 128px
+      // Add custom font sizes
+      tiny: "0.7rem", // Custom tiny size
+      huge: "5rem", // Custom huge size
+      massive: "10rem", // Custom massive size
+    },
+    extend: {
+      backgroundImage:{
+        heroGradient:
+        "linear-gradient(91deg, rgb(18 12 1 / 70%), rgb(0 0 0 / 40%)), url(/src/assets/melodyofthespirit.jpg)",
+      },
+      fontSize: {
+        xxs: "0.625rem", // 10px
+        xs: "0.75rem", // 12px
+        sm: "0.875rem", // 14px
+        base: "1rem", // 16px
+        lg: "1.125rem", // 18px
+        xl: "1.25rem", // 20px
+        "2xl": "1.5rem", // 24px
+        "3xl": "1.875rem", // 30px
+        "4xl": "2.25rem", // 36px
+        "5xl": "3rem", // 48px
+        "6xl": "3.75rem", // 60px
+        "7xl": "4.5rem", // 72px
+        "8xl": "6rem", // 96px
+        "9xl": "8rem", // 128px
+        // Add custom font sizes
+        tiny: "0.7rem", // Custom tiny size
+        huge: "5rem", // Custom huge size
+        massive: "10rem", // Custom massive size
+      },
+    },
   },
   plugins: [],
 };

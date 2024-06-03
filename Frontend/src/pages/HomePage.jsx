@@ -9,39 +9,14 @@ import serviceFlier from "../assets/serviceflier.jpg";
 import { formFieldAnimation } from "../animation";
 import { motion } from "framer-motion";
 
-const FormField = ({ children }) => {
-  return (
-    <motion.div
-      variants={formFieldAnimation}
-      initial="hidden"
-      animate="visible"
-    >
-      {children}
-    </motion.div>
-  );
-};
 
 const HomePage = () => {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <div className="flex flex-col items-center">
-        {/* <FormField> */}
-        <div className="flex justify-center items-center w-[100vw] self-strecth">
-          <img
-            src={programFlier}
-            alt="program flier"
-            className="mt-[85px]  w-[100vw]"
-          />
-        </div>
-        <FormField />
         <VoterForm />
         <Scanner />
-        <div className="flex justify-center w-[100vw] self-strecth">
-          {/* <FormField> */}
-          <img src={serviceFlier} alt="service flier" className="w-[100vw]" />
-          {/* </FormField> */}
-        </div>
       </div>
     </>
   );

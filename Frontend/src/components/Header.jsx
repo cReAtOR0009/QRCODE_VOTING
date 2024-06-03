@@ -1,32 +1,35 @@
 import React from "react";
 import { styles } from "../styles/styles";
+import programFlier from "../assets/melodyofthespiritBig.jpg";
 
 const Header = () => {
+  //bg-heroGradient fullb
   return (
-    <div className="container  relative flex  sm:flex-nowrap flex-wrap  gap-[20px]  mt-[70px] sm:mt-[100px] ">
-      <section className="mt-[30px]  w-100 h-[80vh]">
-        <div className="">
-          <h1 className={`${styles.heading}  text-left`}>
-            Loveworld, giving your Life a Meaning...
+      <section className={`${styles.container}  z-10 flex sm:flex-nowrap flex-wrap justify-between items-center h-[100vh] mt-24 bg-heroGradient fullbg text-[white]`}> 
+        <div className=" flex flex-col gap-4 w-[100vw] md:w-[100vw] ">
+          <h1 className={`${styles.h1} text-[40px] text-[white] text-left`}>
+           Melody Of The Spirit
           </h1>
-        </div>
-        <div className="py-[20px] text-[16px] sm:text-[22px] text-left">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur
-          repudiandae, ducimus aliquid delectus eos quisquam. Eum quisquam in
-          sed totam quos asperiores accusamus saepe, placeat cum cupiditate
-          molestiae fugiat sunt corrupti. Omnis recusandae ullam aliquam
-          laudantium, repellat deserunt voluptatum necessitatibus minima error,
-          rem nostrum deleniti neque tempore officiis, iusto perspiciatis!
-        </div>
-        <div className="flex  flex-col sm:flex-row justify-end text-[right] my-[10px]">
-          <button
-            className={`${styles.buttonPadding}  bg-Purple-60 text-[white] `}
+          <p>A Carnival of Music and Arts</p>
+          <p> Loveworld, giving your Life a Meaning...</p>
+          <div className="flex gap-4">
+          {/* <button
+            className={`${styles.buttonPadding}  bg-[#6636e0] text-[white] `}
           >
             Learn More
-          </button>
+          </button> */}
+          <a href="#voteform"><button
+            className={`${styles.buttonPadding}  bg-[#6636e0] text-[white] `}
+          >
+            Vote Now
+          </button></a>
+          </div>
         </div>
+        {/* <div className=" hidden md:block">
+        <img src={programFlier} alt="" />
+        </div> */}
+        
       </section>
-    </div>
   );
 };
 

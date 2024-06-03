@@ -20,9 +20,6 @@ const Scanner = () => {
       >
         click startscan to show scanner here
       </div>
-      <p className="text-center text-muted">
-        scanner UI modification in development...
-      </p>
       <div className="flex justify-center">
         <button
           className={`hover:bg-[#2c068f] hover:text-[white]  py-[14px] lg:px-[24px] lg:py-[18px] text-[14px] md:text-[18px] rounded-[8px]  bg-Purple-60 text-[white] px-[101px] w-[100%]`}
