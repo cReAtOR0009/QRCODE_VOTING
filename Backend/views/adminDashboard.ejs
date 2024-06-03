@@ -13,15 +13,15 @@
 </head>
 
 <body>
-  <div class="container-fluid">
+  <div class="container-fluid p-6">
+    <h1 class="text-center">Melody Of The Sprit Voters Result Dashboard</h1>
     <div class="row">
       <!-- Left Sidebar -->
       <div class="col-md-3">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <a class="nav-link active mb-3" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-          <a class="nav-link mb-3" id="v-pills-facultyvote-tab" data-toggle="pill" href="#v-pills-facultyvote" role="tab" aria-controls="v-pills-facultyvote" aria-selected="false">Faculty votes</a>
-          <a class="nav-link mb-3" id="v-pills-induvidualvotes-tab" data-toggle="pill" href="#v-pills-induvidualvotes" role="tab" aria-controls="v-pills-induvidualvotes" aria-selected="false">Individual votes</a>
-          <a class="nav-link mb-3" id="v-pills-allvotes-tab" data-toggle="pill" href="#v-pills-allvotes" role="tab" aria-controls="v-pills-allvotes" aria-selected="false">All votes</a>
+          <a class="nav-link mb-3" id="v-pills-facultyvote-tab" data-toggle="pill" href="#v-pills-total-faculty-votes" role="tab" aria-controls="v-pills-facultyvote" aria-selected="false">Total votes</a>
+          <a class="nav-link mb-3" id="v-pills-all-Faculty-votes-tab" data-toggle="pill" href="#v-pills-facultyVotes" role="tab" aria-controls="v-pills-facultyVotes" aria-selected="false"> Facuty Volts</a>
           <!-- Add more tabs as needed -->
         </div>
       </div>
@@ -38,25 +38,40 @@
               <p>Your ID: <%= user.id %></p> <!-- Render additional user data as needed -->
               <a href="/admin/logout" class="btn btn-primary">Logout</a> <!-- Example logout link -->
             </div>
-            <!-- Add home content here -->
           </div>
-          <div class="tab-pane fade" id="v-pills-facultyvote" role="tabpanel" aria-labelledby="v-pills-facultyvote-tab">
-            <h3>Faculty votes</h3>
-            <!-- Display faculty votes here -->
-            <div id="faculty-votes"></div>
-            <div id="total-faculty-votes"></div> <!-- Total faculty votes table will be rendered here -->
+          <!-- Display Total faculty votes here -->
+          <div class="tab-pane fade" id="v-pills-total-faculty-votes" role="tabpanel" aria-labelledby="v-pills-facultyvote-tab">
+            <h3>Total Faculty votes</h3>
+            <div id="total-faculty-votes">
+              <!-- <div id="votes-tables"></div> -->
+            </div>
+
+            <!-- <div id="total-faculty-votes"></div> Total faculty votes table will be rendered here -->
           </div>
-          <div class="tab-pane fade" id="v-pills-induvidualvotes" role="tabpanel" aria-labelledby="v-pills-induvidualvotes-tab">
-            <h3>Individual votes</h3>
-            <!-- Display individual votes here -->
-            <div id="individual-votes"></div>
-            <div id="total-individual-votes"></div> <!-- Total individual votes table will be rendered here -->
-          </div>
+
+          <!-- Display all votes here -->
           <div class="tab-pane fade" id="v-pills-allvotes" role="tabpanel" aria-labelledby="v-pills-allvotes-tab">
             <h3>All votes</h3>
-            <!-- Display all votes here -->
             <div id="all-votes"></div>
             <div id="all-faculty-votes"></div> <!-- Total individual votes table will be rendered here -->
+          </div>
+          <div class="tab-pane fade" id="v-pills-facultyVotes" role="tabpanel" aria-labelledby="v-pills-facultyVotes-tab">
+            <!-- <h3>Induvidal Faculty votes</h3> -->
+            <div class="nav flex-row flex-nowrap gap-2 nav-pills facultyTab" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+            </div>
+            <div class="tab-content facultyContentContainer" id="v-pills-tabContent">
+
+            </div>
+            <div class="text-center d-flex flex-column justify-content-center align-items-center " id="pagination">
+              <ul>
+
+              </ul>
+            </div>
+
+            <!-- Display all votes here -->
+            <!-- <div id="all-votes"></div> -->
+            <div id="all-facultyVotes"></div> <!-- Total individual votes table will be rendered here -->
           </div>
           <!-- Add more tab panes as needed -->
         </div>
@@ -73,260 +88,293 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <script>
-    // Fetch individual votes
-    axios.get('/votes/faculty')
-      .then(response => {
-        const facultyVotesData = response.data.data;
-        // console.log("facultyVotesData :", facultyVotesData)
-        // console.log("facultyVotesData :", facultyVotesData)
-        renderFacultyVotesTables(facultyVotesData);
-        renderTotalFacultyVotesTable(facultyVotesData); // Render total faculty votes table
-      })
-      .catch(error => {
-        console.error('Error fetching faculty votes:', error);
-        const facultyVotesContainer = document.getElementById('faculty-votes');
-        facultyVotesContainer.innerHTML = '<p>Error fetching faculty votes. Please try again later.</p>';
+    let currentPage = 1;
+    const limit = 10; // Number of votes per page
+
+    // Function to Fetch individual votes in faculty, tab3
+    // Function to fetch votes for faculty with pagination 
+    function fetchVotesForFaculty(currentPage, limit, faculty, id) {
+      axios.get(`/votes/faculty/faculty?page=${currentPage}&limit=${limit}&faculty=${faculty}`)
+        .then(response => {
+          const facultyVotesData = response.data.data;
+          const totalPages = response.data.totalPages;
+          renderVotesInFacultyTab(faculty, facultyVotesData, id);
+          renderPaginationButtons(currentPage, totalPages, faculty, id);
+        })
+        .catch(error => {
+          console.error(`Error fetching faculty votes for ${faculty}:`, error);
+          console.log("error:", error);
+        });
+    }
+
+    // Function to render optimized pagination buttons using Bootstrap
+    function renderPaginationButtons(currentPage, totalPages, faculty, id) {
+      const paginationContainer = document.getElementById('pagination');
+      paginationContainer.style.justifyContent = "center"
+      paginationContainer.innerHTML = '';
+
+      // Display current page and total pages
+      const pageInfo = document.createElement('div');
+      pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+      pageInfo.className = 'mb-3'; // Bootstrap margin bottom
+      paginationContainer.appendChild(pageInfo);
+
+      const ul = document.createElement('ul');
+      ul.className = 'pagination';
+
+      // Previous button
+      const prevLi = document.createElement('li');
+      prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+      const prevButton = document.createElement('button');
+      prevButton.className = 'page-link';
+      prevButton.textContent = 'Previous';
+      prevButton.addEventListener('click', () => {
+        if (currentPage > 1) fetchVotesForFaculty(currentPage - 1, limit, faculty, id);
+      });
+      prevLi.appendChild(prevButton);
+      ul.appendChild(prevLi);
+
+      // Page number buttons
+      let startPage = Math.max(1, currentPage - 2);
+      let endPage = Math.min(totalPages, currentPage + 2);
+
+      if (currentPage <= 3) {
+        endPage = Math.min(totalPages, 5);
+      }
+
+      if (currentPage > totalPages - 3) {
+        startPage = Math.max(1, totalPages - 4);
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        const pageLi = document.createElement('li');
+        pageLi.className = `page-item ${i === currentPage ? 'active' : ''}`;
+        const pageButton = document.createElement('button');
+        pageButton.className = 'page-link';
+        pageButton.textContent = i;
+        pageButton.addEventListener('click', () => fetchVotesForFaculty(i, limit, faculty, id));
+        pageLi.appendChild(pageButton);
+        ul.appendChild(pageLi);
+      }
+
+      // Next button
+      const nextLi = document.createElement('li');
+      nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+      const nextButton = document.createElement('button');
+      nextButton.className = 'page-link';
+      nextButton.textContent = 'Next';
+      nextButton.addEventListener('click', () => {
+        if (currentPage < totalPages) fetchVotesForFaculty(currentPage + 1, limit, faculty, id);
+      });
+      nextLi.appendChild(nextButton);
+      ul.appendChild(nextLi);
+
+      paginationContainer.appendChild(ul);
+    }
+
+    const allFaculty = [
+      "Faculty of Agriculture",
+      "Faculty of Art",
+      "Faculty of Education",
+      "Faculty of Environmental Design and Management",
+      "Faculty of Law",
+      "Faculty of Science",
+      "Faculty of The Social Sciences",
+      "Faculty of Administration and Management Sciences",
+    ];
+
+    // Function to create faculty tab for Induvidual Faculty votes----tab3
+    function createFacultyTab(faculty, index) {
+      const sanitizedFaculty = faculty.replace(/\s+/g, '-');
+      return `
+      <a class="nav-link ${index===0?"":""} faculty mb-3" data-id="v-pills-${sanitizedFaculty}" data-faculty="${faculty}" data-toggle="pill" href="#v-pills-${sanitizedFaculty}" role="tab" aria-controls="v-pills-${faculty}" aria-selected="false">${faculty}</a>`;
+    }
+
+    // Function to create faculty container for Induvidual Faculty votes----tab3
+    function createFacultyContainer(faculty, index) {
+      const sanitizedFaculty = faculty.replace(/\s+/g, '-');
+      return `
+    <div class="tab-pane fade ${index===0?"":""}" id="v-pills-${sanitizedFaculty}" role="tabpanel" aria-labelledby="v-pills-${faculty}-tab"></div>`;
+    }
+
+    // Function to create HTML table rows for induvidual faculty votes--tab3
+    function createFacultyVotesRows(votes) {
+      let rows = '';
+      votes.forEach(vote => {
+        rows += `
+      <tr class="p-2">
+        <td class="p-2">${vote.fullName}</td>
+        <td class="p-2">${vote.phone}</td>
+        <td class="p-2">${vote.level}</td>
+        <td class="p-2">${vote.bestFacultyPerformance}</td>
+        <td class="p-2">${vote.bestIndividualPerformance}</td>
+      </tr>
+    `;
+      });
+      return rows;
+    }
+
+    // Function to create HTML table for induvidual faculty votes--tab3
+    function createFacultyVotesTable(facultyName, votes) {
+      const tableRows = createFacultyVotesRows(votes);
+      return `
+    <table class="table table-bordered">
+      <thead class="thead-light ">
+        <tr>
+          <th class="sortable " data-sort="fullName" style="cursor: pointer;">Full Name</th>
+          <th class="sortable " data-sort="phone" style="cursor: pointer;">Phone</th>
+          <th class="sortable " data-sort="level" style="cursor: pointer;">Level</th>
+          <th class="sortable " data-sort="bestFacultyPerformance" style="cursor: pointer;">Best Faculty Performance</th>
+          <th class="sortable " data-sort="bestIndividualPerformance" style="cursor: pointer;">Best Individual Performance</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${tableRows}
+      </tbody>
+    </table>
+  `;
+    }
+
+    //Function to render HTML table for induvidual faculty Tab
+    function renderVotesInFacultyTab(facultyName, facultyVotesData, id) {
+      const facultyVotesContainer = document.getElementById(id);
+      facultyVotesContainer.innerHTML = ``
+      const facultyVotesTable = createFacultyVotesTable(facultyName, facultyVotesData);
+      facultyVotesContainer.innerHTML += facultyVotesTable;
+
+      // Add sorting functionality
+      document.querySelectorAll('.sortable').forEach(header => {
+        header.addEventListener('click', () => {
+          const sortBy = header.getAttribute('data-sort');
+          console.log("facultyVotesData", facultyVotesData)
+          const sortedVotes = sortTable(facultyVotesData, sortBy);
+          renderVotesInFacultyTab(facultyName, sortedVotes, id);
+        });
+      });
+    }
+
+    // Function to sort table data with support for mixed text and numbers
+    function sortTable(data, key) {
+      return data.sort((a, b) => {
+        const valueA = a[key];
+        const valueB = b[key];
+
+        // Handle cases where values are numbers
+        const numA = parseFloat(valueA);
+        const numB = parseFloat(valueB);
+
+        if (!isNaN(numA) && !isNaN(numB)) {
+          return numA - numB;
+        }
+
+        // Handle cases where values are strings or a mix of strings and numbers
+        if (typeof valueA === 'string' && typeof valueB === 'string') {
+          return valueA.localeCompare(valueB, undefined, {
+            numeric: true
+          });
+        }
+
+        // Fallback for other types
+        if (valueA < valueB) return -1;
+        if (valueA > valueB) return 1;
+        return 0;
+      });
+    }
+    // Add Fetch event Listener to each tab button
+    function addFetchToBtn() {
+      Array.from(document.getElementsByClassName("faculty")).forEach((toggle, index) => {
+        // console.log("element:", toggle);
+        // console.log("element:", toggle.innerHTML);
+        toggle.addEventListener("click", (e) => {
+          e.preventDefault()
+          const faculty = e.target.getAttribute('data-faculty');
+          const id = e.target.getAttribute('data-id');
+          fetchVotesForFaculty(currentPage, limit, faculty, id)
+        });
       });
 
-    axios.get('/votes/totalvotes')
-      .then(response => {
-        const totalVotes = response.data.data;
-        renderTotalVotes(totalVotes)
+    }
 
-      })
+    // Function to render HTML tables for faculty votes----working for tab2,
+    function renderFacultyVotesTab(faculties) {
+      const facultyTabsContainer = document.querySelector('.facultyTab');
+      const facultyContentContainer = document.querySelector(".facultyContentContainer")
 
-      function renderTotalVotes(totalFacultyVotes) {
-    const voteTable = document.getElementById("all-faculty-votes");
-    let tableHeader = "";
-    let tableRows = "";
-    
-    for (const totalFaculty of totalFacultyVotes) {
+      faculties.forEach((faculty, index) => {
+        const facultyTab = createFacultyTab(faculty, index);
+        const facultyContent = createFacultyContainer(faculty, index)
+        facultyTabsContainer.innerHTML += facultyTab;
+        facultyContentContainer.innerHTML += facultyContent
+      });
+    }
+
+    function clickTab() {
+      const firstTab = document.getElementsByClassName("faculty")[0];
+      if (firstTab) {
+        firstTab.click();
+      }
+    }
+
+
+    renderFacultyVotesTab(allFaculty)
+    addFetchToBtn()
+    clickTab();
+  </script>
+
+  <script>
+    // Function to fetch total faculty votes----tab2
+    function fetchTotalVotes() {
+      axios.get('/votes/total')
+        .then(response => {
+          const totalVotes = response.data.data;
+          renderTotalVotes(totalVotes)
+
+        })
+    }
+    // Function to render total faculty votes----tab2
+    function renderTotalVotes(totalFacultyVotes) {
+      const voteTable = document.getElementById("total-faculty-votes");
+      let tableHeader = "";
+      let tableRows = "";
+      let total = 0
+
+      for (const totalFaculty of totalFacultyVotes) {
         const facultyName = Object.keys(totalFaculty)[0];
         const totalVotes = totalFaculty[facultyName];
-        
-        tableHeader += `<th>${facultyName}</th>`;
-        tableRows += `<td>${totalVotes}</td>`;
-    }
-    
-    let table = `
+        total += totalVotes
+
+        tableRows += `
+          <tr>
+            <td>${facultyName}</td>
+            <td>${totalVotes}</td>
+          </tr>
+              `;
+
+      }
+
+      let table = `
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    ${tableHeader}
+                  <th>Faculty</th>
+                  <th>Votes</th>
+                    
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     ${tableRows}
+                    <tr><th>Total</th>
+                      <th>${total}</th></tr>
                 </tr>
             </tbody>
         </table>
     `;
-    
-    voteTable.innerHTML = table;
-}
 
-
-    // axios.get('/votes/bestinduvidualperformance')
-    //   .then(response => {
-    //     const individualVotesData = response.data.data;
-    //     renderIndividualVotesTables(individualVotesData);
-    //     renderTotalIndividualVotesTable(individualVotesData); // Render total individual votes table
-    //   })
-    //   .catch(error => {
-    //     console.error('Error fetching individual votes:', error);
-    //     const individualVotesContainer = document.getElementById('individual-votes');
-    //     individualVotesContainer.innerHTML = '<p>Error fetching individual votes. Please try again later.</p>';
-    //   });
-
-    // Function to create rows for individual votes
-    function createIndividualVotesRows(votes) {
-      let rows = '';
-      votes.forEach(vote => {
-        rows += `
-      <tr>
-        <td>${vote.fullName}</td>
-        <td>${vote.phone}</td>
-        <td>${vote.faculty}</td>
-        <td>${vote.level}</td>
-        <td>${vote.bestFacultyPerformance}</td>
-        <td>${vote.bestIndividualPerformance}</td>
-      </tr>
-    `;
-      });
-      return rows;
+      voteTable.innerHTML = table;
     }
 
-    // Function to create HTML table for individual votes
-    function createIndividualVotesTable(contestant, votes) {
-      const tableRows = createIndividualVotesRows(votes);
-      return `
-    <h4>${contestant}</h4>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Full Name</th>
-          <th>Phone</th>
-          <th>Faculty</th>
-          <th>Level</th>
-          <th>Best Faculty Performance</th>
-          <th>Best Individual Performance</th>
-          </tr>
-      </thead>
-      <tbody>
-        ${tableRows}
-      </tbody>
-    </table>
-  `;
-    }
-
-    // Function to render HTML tables for individual votes
-    function renderIndividualVotesTables(individualVotesData) {
-      const individualVotesContainer = document.getElementById('individual-votes');
-      individualVotesData.forEach(contestant => {
-        const contestantName = Object.keys(contestant)[0];
-        const votes = contestant[contestantName];
-        const individualVotesTable = createIndividualVotesTable(contestantName, votes);
-        individualVotesContainer.innerHTML += individualVotesTable;
-      });
-    }
-
-    // Function to create HTML table rows for faculty votes
-    function createFacultyVotesRows(votes) {
-      let rows = '';
-      votes.forEach(vote => {
-        rows += `
-      <tr>
-        <td>${vote.fullName}</td>
-        <td>${vote.phone}</td>
-        <td>${vote.level}</td>
-        <td>${vote.bestIndividualPerformance}</td>
-      </tr>
-    `;
-      });
-      return rows;
-    }
-
-    // Function to create HTML table for faculty votes
-    function createFacultyVotesTable(facultyName, votes) {
-      const tableRows = createFacultyVotesRows(votes);
-      return `
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Full Name</th>
-          <th>Phone</th>
-          <th>Level</th>
-          <th>Best Individual Performance</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${tableRows}
-      </tbody>
-    </table>
-  `;
-    }
-
-    // Function to render HTML tables for faculty votes
-    function renderFacultyVotesTables(facultyVotesData) {
-      const facultyVotesContainer = document.getElementById('faculty-votes');
-      facultyVotesData.forEach(faculty => {
-        const facultyName = Object.keys(faculty)[0];
-        const votes = faculty[facultyName];
-        const facultyVotesTable = createFacultyVotesTable(facultyName, votes);
-        facultyVotesContainer.innerHTML += `<h4>${facultyName}</h4>` + facultyVotesTable;
-      });
-    }
-
-    // Function to calculate total individual votes
-    function calculateTotalIndividualVotes(individualVotesData) {
-      const totalIndividualVotes = {};
-      individualVotesData.forEach(contestant => {
-        const contestantName = Object.keys(contestant)[0];
-        totalIndividualVotes[contestantName] = contestant[contestantName].length;
-      });
-      return totalIndividualVotes;
-    }
-
-    // Function to create HTML table for total individual votes
-    function createTotalIndividualVotesTable(totalIndividualVotes) {
-      let tableRows = '';
-      for (const contestantName in totalIndividualVotes) {
-        tableRows += `
-      <tr>
-        <td>${contestantName}</td>
-        <td>${totalIndividualVotes[contestantName]}</td>
-      </tr>
-    `;
-      }
-      const totalIndividualVotesTable = `
-    <h4>Total Individual Votes</h4>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Contestant</th>
-          <th>Total Votes</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${tableRows}
-      </tbody>
-    </table>
-  `;
-      const totalIndividualVotesContainer = document.getElementById('total-individual-votes');
-      totalIndividualVotesContainer.innerHTML = totalIndividualVotesTable;
-    }
-
-    // Function to render total individual votes table
-    function renderTotalIndividualVotesTable(individualVotesData) {
-      const totalIndividualVotes = calculateTotalIndividualVotes(individualVotesData);
-      createTotalIndividualVotesTable(totalIndividualVotes);
-    }
-
-    // Function to calculate total faculty votes
-    function calculateTotalFacultyVotes(facultyVotesData) {
-      const totalFacultyVotes = {};
-      facultyVotesData.forEach(faculty => {
-        const facultyName = Object.keys(faculty)[0];
-        totalFacultyVotes[facultyName] = faculty[facultyName].length;
-      });
-      return totalFacultyVotes;
-    }
-
-    // Function to create HTML table for total faculty votes
-    function createTotalFacultyVotesTable(totalFacultyVotes) {
-      let tableRows = '';
-      for (const facultyName in totalFacultyVotes) {
-        tableRows += `
-      <tr>
-        <td>${facultyName}</td>
-        <td>${totalFacultyVotes[facultyName]}</td>
-      </tr>
-    `;
-      }
-      const totalFacultyVotesTable = `
-    <h4>Total Faculty Votes</h4>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Faculty</th>
-          <th>Total Votes</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${tableRows}
-      </tbody>
-    </table>
-  `;
-      const totalFacultyVotesContainer = document.getElementById('total-faculty-votes');
-      totalFacultyVotesContainer.innerHTML = totalFacultyVotesTable;
-    }
-
-    // Function to render total faculty votes table
-    function renderTotalFacultyVotesTable(facultyVotesData) {
-      const totalFacultyVotes = calculateTotalFacultyVotes(facultyVotesData);
-      createTotalFacultyVotesTable(totalFacultyVotes);
-    }
+    fetchTotalVotes()
   </script>
 </body>
 

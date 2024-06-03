@@ -16,10 +16,10 @@ const defaultServerResponse = constants.defaultServerResponse;
 const voteResponse = constants.voteResponse;
 
 const app = express();
-const path = require("path");
+const path = require("path"); 
 app.set("view engine", "ejs");
-
-// Serve static assets
+ 
+// Serve static assets 
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 app.use(cors());
 app.use(express.json());
@@ -67,11 +67,11 @@ app.post("/", async (req, res) => {
     });
 
     await newVote.save();
-
+ 
     await VotingURL.findByIdAndUpdate(
       { _id: existingUrl.id },
       { used: true, vote: newVote.id },
-      {
+      {          
         new: true,
       }
     );

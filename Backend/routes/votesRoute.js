@@ -12,7 +12,7 @@ const { authMiddleware } = require("../utilities/validateToken");
 const { formatMongoData } = require("../utilities/formatMongoData");
 const allFaculty = [
   "Faculty of Agriculture",
-  "Faculty of Art",
+  "Faculty of Art",  
   "Faculty of Education",
   "Faculty of Environmental Design and Management",
   "Faculty of Law",
@@ -23,41 +23,118 @@ const allFaculty = [
 
 //render dasboard can get votes for each faculty
 //render dashboard can get votes for each induvidual performance
-//render dashboard total casted votes
+//render dashboard total casted votes 
 //render dashboard can get deta
 
 router.get("/faculty", authMiddleware, async (req, res) => {
   let votes = [];
   let response = defaultServerResponse;
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
 
   try {
     for (let index = 0; index < allFaculty.length; index++) {
       let votObject = {};
+      
+      // Find the faculty votes, limit the result, and skip the appropriate number of documents
       const facultyVotes = await Vote.find({
         bestFacultyPerformance: allFaculty[index],
-      });
+      })
+
       let formattedResult = await formatMongoData(facultyVotes);
-      // console.log("facultyVotes: ", formattedResult);
       votObject[allFaculty[index]] = formattedResult;
       votes.push(votObject);
     }
     let formattedData = votes;
 
     response.status = 200;
-    response.message = "data fetched successfully";
+    response.message = "Data fetched successfully";
     response.data = formattedData;
     response.error = null;
   } catch (error) {
     console.log(error);
-    console.log("something went wrong while fetching data: ", error.message);
-    response.status = response.status;
-    response.message = "something went wrong while fetching data";
+    console.log("Something went wrong while fetching data: ", error.message);
+    response.status = 500;
+    response.message = "Something went wrong while fetching data";
+    response.data = {};
+    response.error = error.message;
+  } finally {
+    return res.status(response.status).send(response);
+  }
+});  
+
+router.get("/total", authMiddleware, async (req, res) => {
+  let votes = [];   
+  let response = defaultServerResponse;
+
+  try {
+    for (let index = 0; index < allFaculty.length; index++) {
+      let votObject = {};
+      
+      // Find the faculty votes, limit the result, and skip the appropriate number of documents
+      const facultyVotes = await Vote.find({
+        faculty: allFaculty[index],
+      });
+
+      let formattedResult = await formatMongoData(facultyVotes);
+      votObject[allFaculty[index]] = formattedResult.length;
+      votes.push(votObject);
+    }
+    let formattedData = votes;
+
+    response.status = 200;
+    response.message = "Data fetched successfully";
+    response.data = formattedData;
+    response.error = null;
+  } catch (error) {
+    console.log(error);
+    console.log("Something went wrong while fetching data: ", error.message);
+    response.status = 500;
+    response.message = "Something went wrong while fetching data";
     response.data = {};
     response.error = error.message;
   } finally {
     return res.status(response.status).send(response);
   }
 });
+
+router.get("/faculty/faculty", async (req, res) => {
+  let response = defaultServerResponse;
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+  const faculty = req.query.faculty;
+
+  try {
+    const totalDocuments = await Vote.countDocuments({ faculty: faculty });
+    const votesForFaculty = await Vote.find({ faculty: faculty }).skip(skip).limit(limit);
+
+    let formattedResult = await formatMongoData(votesForFaculty);
+    const totalPages = Math.ceil(totalDocuments / limit);
+    const hasMoreData = page < totalPages;
+
+    response.status = 200;
+    response.message = "Data fetched successfully";
+    response.data = formattedResult;
+    response.totalDocuments = totalDocuments;
+    response.totalPages = totalPages;
+    response.currentPage = page;
+    response.hasMoreData = hasMoreData;
+    response.error = null;
+  } catch (error) {
+    console.log(error);
+    console.log("Something went wrong while fetching data: ", error.message);
+    response.status = 500; 
+    response.message = "Something went wrong while fetching data";
+    response.data = {};
+    response.error = error.message;
+  } finally {
+    return res.status(response.status).send(response);
+  } 
+});
+
+
 
 router.get("/totalvotes", authMiddleware, async (req, res) => {
   let totalvotesArray = [];
