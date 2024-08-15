@@ -60,7 +60,7 @@ export const QrCodeScannerProvider = ({ children }) => {
         .catch((error) => {
           setLoading(false);
           console.error("Error in vote:", error.response.data);
-          toast.error(error.response.data.Error, {
+          toast.error(error.response?.data.Error || "error accessing server, check your internet connection and retry", {
             autoClose: 5000,
           });
           reject(error);
@@ -85,6 +85,7 @@ export const QrCodeScannerProvider = ({ children }) => {
 
     // Update form data with scan result
     const updatedFormData = { ...formData, voteUrl: scanResult };
+    console.log("qr code:", updatedFormData.voteUrl)
 
     // Validate form fields
     if (
@@ -196,6 +197,7 @@ export const QrCodeScannerProvider = ({ children }) => {
         onScanFailure
       )
       .catch((err) => {
+        console.log("errror:..", err)
         console.log("Error starting scanner");
       });
   }

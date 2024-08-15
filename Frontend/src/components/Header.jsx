@@ -5,12 +5,12 @@ import programFlier from "../assets/melodyofthespiritBig.jpg";
 const Header = () => {
   //bg-heroGradient fullb
   return (
-      <section className={`${styles.container}  z-10 flex sm:flex-nowrap flex-wrap justify-between items-center h-[100vh] mt-24 bg-heroGradient fullbg text-[white] md:bg-heroGradientLarge`}> 
+      <section className={`${styles.container}  z-10 flex sm:flex-nowrap flex-wrap justify-between items-center h-[100vh] mt-24 bg-heroGradient fullbg text-[white] `}> 
         <div className=" flex flex-col gap-4 w-[100vw] md:w-[100vw] ">
-          <h1 className={`${styles.h1} text-[40px] text-[white] text-left`}>
+          <h1 className={`${styles.h1}  text-[white] text-left`}>
            Melody Of The Spirit
           </h1>
-          <p>A Carnival of Music and Arts</p>
+          <h2 className={`${styles.h2}`}>A Carnival of Music and Arts</h2>
           <p> Loveworld, giving your Life a Meaning...</p>
           <div className="flex gap-4">
           {/* <button

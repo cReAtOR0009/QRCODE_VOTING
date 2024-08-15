@@ -1,4 +1,3 @@
-
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{js,jsx}"],
@@ -20,7 +19,28 @@ export default {
       // => @media (min-width: 1536px) { ... }
     },
     colors: {
-     
+      // Background colors
+      "gray-50": "#F9FAFB", // Light gray background
+
+      // Card background
+      white: "#FFFFFF",
+
+      // Primary color
+      "blue-600": "#2563EB", // Primary blue color
+
+      // Text colors
+      "gray-800": "#1F2937", // Dark gray for text
+      "gray-600": "#4B5563", // Medium gray for text
+
+      // Accent color
+      "blue-600": "#2563EB", // Accent blue color
+
+      "soft-blue": "#6636e0",
+      "pale-lavender": "#c2e9fb",
+      "deep-indigo": "#4b0082",
+      "muted-lavender": "#8a4baf",
+      "midnight-navy": "#2c3e50",
+      "vibrant-royal-blue": "#6636e0",
     },
 
     fontFamily: {
@@ -48,12 +68,12 @@ export default {
       massive: "10rem", // Custom massive size
     },
     extend: {
-      backgroundImage:{
+      backgroundImage: {
         heroGradient:
-        "linear-gradient(91deg, rgb(18 12 1 / 70%), rgb(0 0 0 / 40%)), url(/src/assets/melodyofthespirit.jpg)",
+          "linear-gradient(91deg, rgb(18 12 1 / 70%), rgb(0 0 0 / 40%)), url(/src/assets/melodyofthespirit.jpg)",
         heroGradientLarge:
-        "linear-gradient(91deg, rgb(22 108 215 / 70%), rgb(244 244 244 / 40%))",
-        VoterFormbg:"linear-gradient(91deg, rgb(22 108 215 / 70%), rgb(244 244 244 / 40%))"
+          "linear-gradient(91deg, rgb(22 108 215 / 70%), rgb(244 244 244 / 40%))",
+        VoterFormbg: "linear-gradient(to right, #efefbb, #d4d3dd)",
       },
       fontSize: {
         xxs: "0.625rem", // 10px

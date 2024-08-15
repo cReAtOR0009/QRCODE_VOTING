@@ -3,23 +3,26 @@ import { styles } from "../styles/styles";
 import { qrCodeScannerContext } from "../context/qrCodeScannerContext";
 
 const OperateQrScanner = () => {
-  const { startScan, stopScan } = useContext(qrCodeScannerContext);
+  const { startScan, stopScan, handleSubmit, loading } = useContext(qrCodeScannerContext);
   return (
     <div className={`  flex justify-center items-center gap-[20px]`}>
       <button
         type="button"
+         disabled={loading}
         onClick={startScan}
-        className={`${styles.buttonPadding}   bg-[#6636e0] text-[white]`}
+        className={`${styles.buttonPadding} ${loading?"bg-[#6636e089]":"bg-[#6636e0]"}  bg-[#6636e0] text-[white]`}
       >
         StartScanner
       </button>
-      <button
-        type="button"
-        onClick={stopScan}
-        className={`${styles.buttonPadding}   bg-[#8c7cb6] text-[white]`}
-      >
-        StopScanner
-      </button>
+      <div className={` justify-center`}>
+        <button
+        disabled={loading}
+        className={`${styles.buttonPadding} ${loading?"bg-[#6636e089]":"bg-[#6636e0]"}  text-[white]`}
+          onClick={handleSubmit}
+        >
+         {loading?"Voting...":"Cast Vote"}
+        </button>
+      </div>
     </div>
   );
 };

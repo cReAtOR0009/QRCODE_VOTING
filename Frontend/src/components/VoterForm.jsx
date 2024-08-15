@@ -19,14 +19,17 @@ const VoterForm = () => {
     <div
       // onSubmit={handleSubmit}
       id="voteform"
-      className={` ${styles.container} flex flex-col justify-center items-center gap-[20px] md:gap-[50px] bg-VoterFormbg border-t-2 `}
+      className={` ${styles.container} `}
     >
+      <div className="flex flex-col justify-center items-center gap-[20px] md:gap-[50px] border-t-2 ">
+
+      </div>
       <h1 className="text-[20px] md:text-[50px] text-Purple-60 font-medium">
         VOTE FOR YOUR FAVOURITE FACULTY PERFORMANCE!
       </h1>
-      <div className="flex-col  justify-between self-stretch gap-[50px] md:gap-[40px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2  justify-between self-stretch gap-[10px] md:gap-[10px]">
         <div
-          className={`${""} flex flex-col flex-1 mb-[10px] gap-[5px] md:gap-[16px]`}
+          className={`${""} flex flex-col flex-1   `}
         >
           <label
             htmlFor="fullName"
@@ -46,7 +49,7 @@ const VoterForm = () => {
           />
         </div>
         <div
-          className={`${""} flex flex-col flex-1 mb-[10px] gap-[5px] md:gap-[16px]`}
+          className={`${""} flex flex-col flex-1   `}
         >
           <label htmlFor="phone" className="text-[20px] text-Purple-60">
             Phone:
@@ -62,7 +65,7 @@ const VoterForm = () => {
             required
           />
         </div>
-        <div className="flex flex-col mt-[15px] flex-1 mb-[10px] gap-[5px] md:gap-[16px]">
+        <div className="flex flex-col mt-[15px] flex-1   ">
           <label htmlFor="faculty" className="text-[20px] text-Purple-60">
             Faculty:
           </label>
@@ -101,7 +104,7 @@ const VoterForm = () => {
             </option>
           </select>
         </div>
-        <div className="flex flex-col  mt-[15px] flex-1 mb-[10px] gap-[5px] md:gap-[16px]">
+        <div className="flex flex-col  mt-[15px] flex-1   ">
           <label htmlFor="level" className="text-[20px] text-Purple-60">
             Level:
           </label>
@@ -121,7 +124,7 @@ const VoterForm = () => {
             <option value="500">500 Level</option>
           </select>
         </div>
-        <div className="flex flex-col mt-[15px]  flex-1 mb-[10px] gap-[5px] md:gap-[16px]">
+        <div className="flex flex-col mt-[15px]  flex-1   w-full ">
           <label
             htmlFor="bestFacultyPerformance"
             className="text-[20px] text-Purple-60"
@@ -156,22 +159,22 @@ const VoterForm = () => {
           </select>
         </div>
 
-        <div className="w-full max-w-[100vw]  flex-0 text-wrap">
+        {/* <div className="w-full max-w-[100vw]  flex-0 text-wrap bg-[red]"> */}
           <input
-            className="h-[40px] w-[100%]  text-[#4e52b9]  focus:text-[#605ce8] focus:border focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
+            className="hidden h-[40px] w-[100%]  text-[#4e52b9]  focus:text-[#605ce8] focus:border focus:shadow-lg outline-none focus:border-Purple-60 px-[5px] bg-[white] border border-Purple-60 rounded"
             type="text"
             value={scanResult}
             readOnly
             // className="container"
             placeholder="kindly scan a qrcode to fill here, you cant fill manually"
           />
-        </div>
+        {/* </div> */}
 
+      </div>
         <div className="flex mt-[15px] flex-col sm:flex-z justify-end md:justify-center text-[right] my-[10px]">
           <OperateQrScanner />
         </div>
-      </div>
-      {loading && <div className="loadingAnimation"></div>}
+      {/* {loading && <div className="loadingAnimation"></div>} */}
     </div>
   );
 };

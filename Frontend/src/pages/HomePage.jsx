@@ -6,8 +6,10 @@ import programFlier from "../assets/melodyofthespiritBig.jpg";
 import programFlier2 from "../assets/melodyofthespirit.jpg";
 import serviceFlier from "../assets/serviceflier.jpg";
 
-import { formFieldAnimation } from "../animation";
+// import { formFieldAnimation } from "../animation";
 import { motion } from "framer-motion";
+import VotingSteps from "../components/VotingSteps.jsx";
+import ContactHelp from "../components/ContactHelp.jsx";
 
 
 const HomePage = () => {
@@ -15,9 +17,11 @@ const HomePage = () => {
     <>
       <Header />
       <div className="flex flex-col items-center">
+        <VotingSteps />
         <VoterForm />
         <Scanner />
       </div>
+        <ContactHelp />
     </>
   );
 };

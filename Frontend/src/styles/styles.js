@@ -2,7 +2,7 @@ import { Container } from "postcss";
 
 const styles = {
   container: "px-4 py-6 sm:px-10 md:py-10  lg:p-20 xl:p-20 ",
-  h1: "text-[40px] md:text-[40px] lg:[50px] xl:text-[60px] font-bold text-white leading-tight",
+  h1: "text-[40px] md:text-[5vw] lg:[40vw] xl:text-[40%] font-bold text-white leading-tight",
   h2: "text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-semibold leading-snug text-secondary2",
   h3: "text-xl md:text-2xl lg:text-2xl xl:text-2xl font-medium leading-normal",
   h4: "text-base md:text-xl lg:text-xl xl:text-xl font-medium leading-normal",
@@ -25,7 +25,7 @@ const styles = {
   cardHeading:
     "text-[18px] md:text-[20px] lg:text-[24px] xl:text-[24px] text-white-90",
   buttonPadding:
-    "hover:bg-[#2c068f] hover:text-[white] px-[20px] py-[14px] lg:px-[24px] lg:py-[18px] text-[14px] md:text-[18px] rounded-[8px]",
+    "hover:bg-[#2c068f] hover:text-[white] px-[20px] py-[10px] lg:px-[24px] lg:py-[10px] text-[14px] md:text-[18px] rounded-[8px]",
   purpleButton: "bg-Purple-60 rounded-[8px]",
   blackButton: "border border-Grey-15  rounded-[8px]",
   formContainer:
