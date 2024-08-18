@@ -5,21 +5,21 @@ import programFlier from "../assets/melodyofthespiritBig.jpg";
 const Header = () => {
   //bg-heroGradient fullb
   return (
-      <section className={`${styles.container}  z-10 flex sm:flex-nowrap flex-wrap justify-between items-center h-[100vh] mt-24 bg-heroGradient fullbg text-[white] `}> 
-        <div className=" flex flex-col gap-4 w-[100vw] md:w-[100vw] ">
+      <section className={`${styles.container} relative flex sm:flex-nowrap flex-wrap justify-between items-center h-[100vh] mt-24 bg-heroGradient fullbg text-[white] w-full `}> 
+        <div className=" flex flex-col items-center  gap-4 w-[100vw] md:w-[100vw] ">
           <h1 className={`${styles.h1}  text-[white] text-left`}>
            Melody Of The Spirit
           </h1>
           <h2 className={`${styles.h2}`}>A Carnival of Music and Arts</h2>
           <p> Loveworld, giving your Life a Meaning...</p>
           <div className="flex gap-4">
-          {/* <button
-            className={`${styles.buttonPadding}  bg-[#6636e0] text-[white] `}
+          <button
+            className={`${styles.buttonPadding}  bg-blue-600 text-[white] `}
           >
             Learn More
-          </button> */}
+          </button>
           <a href="#voteform"><button
-            className={`${styles.buttonPadding}  bg-[#6636e0] text-[white] `}
+            className={`${styles.buttonPadding}  bg-blue-600 text-[white] `}
           >
             Vote Now
           </button></a>

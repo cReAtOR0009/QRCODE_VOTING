@@ -10,6 +10,7 @@ import serviceFlier from "../assets/serviceflier.jpg";
 import { motion } from "framer-motion";
 import VotingSteps from "../components/VotingSteps.jsx";
 import ContactHelp from "../components/ContactHelp.jsx";
+import CardCarousel from "../components/Carousel.jsx";
 
 
 const HomePage = () => {
@@ -17,6 +18,7 @@ const HomePage = () => {
     <>
       <Header />
       <div className="flex flex-col items-center">
+        <CardCarousel />
         <VotingSteps />
         <VoterForm />
         <Scanner />

@@ -1,6 +1,47 @@
 /** @type {import('tailwindcss').Config} */
+const x = [
+  "0",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "20",
+  "30",
+  "40",
+  "50",
+  "60",
+  "70",
+  "80",
+  "90",
+  "100",
+  "200",
+  "300",
+  "400",
+  "500",
+  "600",
+  "700",
+  "800",
+  "900",
+  "1000",
+  "1100",
+  "1200",
+  "1300",
+  "1400",
+  "1500",
+];
+
+const safelist = [
+  ...x.map((position) => `translate-x-[${position}px]`),
+  ...x.map((position) => `-translate-x-[${position}px]`)
+]
 export default {
   content: ["./src/**/*.{js,jsx}"],
+  safelist,
   theme: {
     screens: {
       sm: "640px",
@@ -26,14 +67,15 @@ export default {
       white: "#FFFFFF",
 
       // Primary color
-      "blue-600": "#2563EB", // Primary blue color
+      "blue-600": "#6636e0", // Primary blue color
+      // bg-[#6636e0]
 
       // Text colors
       "gray-800": "#1F2937", // Dark gray for text
       "gray-600": "#4B5563", // Medium gray for text
 
       // Accent color
-      "blue-600": "#2563EB", // Accent blue color
+      "blue-600": "#6636e0", // Accent blue color
 
       "soft-blue": "#6636e0",
       "pale-lavender": "#c2e9fb",
@@ -70,10 +112,11 @@ export default {
     extend: {
       backgroundImage: {
         heroGradient:
-          "linear-gradient(91deg, rgb(18 12 1 / 70%), rgb(0 0 0 / 40%)), url(/src/assets/melodyofthespirit.jpg)",
+          "linear-gradient(91deg, rgb(18 12 1 / 70%), rgb(0 0 0 / 40%)), url(/src/assets/worship.jpg)",
         heroGradientLarge:
           "linear-gradient(91deg, rgb(22 108 215 / 70%), rgb(244 244 244 / 40%))",
         VoterFormbg: "linear-gradient(to right, #efefbb, #d4d3dd)",
+        rightArrow: "url(/src/assets/right-arrow.png)"
       },
       fontSize: {
         xxs: "0.625rem", // 10px

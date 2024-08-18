@@ -6,21 +6,21 @@ import { logo, closeButton, openNavButton } from "../assets/importer";
 import { styles } from "../styles/styles";
 
 const NavBar = () => {
-  // const { setNavActive, activeNav } = useContext(NavigationContext);
-  // const [showNav, setShowNav] = useState(false);
+  const { setNavActive, activeNav } = useContext(NavigationContext);
+  const [showNav, setShowNav] = useState(false);
 
-  // const navLinks = [
-  //   { title: "Home", id: "#home" },
-  //   { title: "Churches", id: "#churches" },
-  //   { title: "Events", id: "#events" },
-  //   { title: "Initiatives", id: "#initiatives" },
-  //   { title: "About us", id: "#about us" },
-  // ];
+  const navLinks = [
+    { title: "Home", id: "#home" },
+    { title: "Churches", id: "#churches" },
+    { title: "Programs", id: "#programs" },
+    { title: "Initiatives", id: "#initiatives" },
+    { title: "About us", id: "#about us" },
+  ];
 
   return (
-    <nav className={`fixed`}>
+    <nav className={``}>
       <div
-        className={`${styles.navContainer} bg-[#6636e0] rounded-b-[10px] fixed top-0 z-20 w-[100vw] flex justify-start items-center`}
+        className={`${styles.navContainer} bg-[#6636e0] rounded-b-[10px] fixed top-0 z-20 w-[100vw] flex justify-between items-center`}
       >
         <a href="/" className="logo">
           <img
@@ -29,7 +29,7 @@ const NavBar = () => {
             className="w-[80px] h-[auto] items-start"
           />
         </a>
-        {/* <ul className="hidden py-[10px] sm:flex justify-between items-center space-x-4">
+        <ul className="hidden py-[10px] sm:flex justify-between items-center space-x-4">
           {navLinks.map((navlink, index) => (
             <li
               key={index}
@@ -37,7 +37,7 @@ const NavBar = () => {
                 activeNav === navlink.id
                   ? "rounded-[8px] py-[10px] bg-Purple-60 border border-Grey-15"
                   : ""
-              }`}
+              } cursor-pointer`}
               onClick={() => setNavActive(navlink.id)}
             >
               <Link
@@ -50,7 +50,7 @@ const NavBar = () => {
           ))}
         </ul>
         <button className="text-white hidden sm:flex bg-gray-08 border border-gray-15 rounded p-2">
-          Contact
+          Contact Us
         </button>
         <div
           onClick={() => setShowNav(true)}
@@ -86,7 +86,7 @@ const NavBar = () => {
                     activeNav === navlink.id
                       ? "rounded-[8px]  bg-Purple-60 border border-Grey-15"
                       : ""
-                  } text-white`}
+                  } text-white cursor-pointer`}
                   onClick={() => {
                     setNavActive(navlink.id), setShowNav(false);
                   }}
@@ -106,7 +106,7 @@ const NavBar = () => {
           </div>
         ) : (
           ""
-        )} */}
+        )}
       </div>
     </nav>
   );

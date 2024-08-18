@@ -1,0 +1,21 @@
+
+.card-carousel-container {
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .card-description {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+  
+  .card-carousel {
+      display: flex;
+      overflow-x: auto;
+    }
+  
+  .carousel-card {
+    flex-shrink: 0;
+  }
+  
