@@ -14,7 +14,7 @@ const cards = [
   },
   {
     id: 2,
-    title: "Our Programme1",
+    title: "Our Programme2",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, quos.",
     image:
@@ -23,7 +23,7 @@ const cards = [
   },
   {
     id: 3,
-    title: "Our Programme1",
+    title: "Our Programme3",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, quos.",
     image:
@@ -32,7 +32,7 @@ const cards = [
   },
   {
     id: 4,
-    title: "Our Programme1",
+    title: "Our Programme4",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, quos.",
     image:
@@ -102,11 +102,11 @@ const CardCarousel = () => {
 
           <div className="flex gap-5 ">
             <span
-              className="p-8 rounded-full bg-rightArrow bg-no-repeat bg-center rotate-180 border-2 border-r-blue-600 cursor-pointer"
+              className="absolute left-5 top-1/2 p-8 rounded-full bg-rightArrow bg-no-repeat bg-center rotate-180 border-2 border-r-blue-600 cursor-pointer"
               onClick={handlePrevClick}
             ></span>
             <span
-              className="p-8 rounded-full bg-rightArrow bg-no-repeat bg-center border-2 border-r-blue-600 cursor-pointer"
+              className="absolute right-5 top-1/2 p-8 rounded-full bg-rightArrow bg-no-repeat bg-center border-2 border-r-blue-600 cursor-pointer"
               onClick={handleNextClick}
             ></span>
           </div>
@@ -117,7 +117,7 @@ const CardCarousel = () => {
           {cards.map((card) => (
             <div
               key={card.id}
-              className={`min-w-[200px] md:min-w-[200px] h-[240px] md:h-[300px] border border-t-blue-600 bg-gray-800 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 bg-center bg-cover cursor-pointer `}
+              className={`min-w-[200px] ${selectedCard === card?"border-2 border-blue-600":""} md:min-w-[200px] h-[240px] md:h-[300px]   rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 bg-center bg-cover cursor-pointer `}
               onClick={() => handleCardClick(card)}
               style={{
                 backgroundImage: `url(${card.image})`,
