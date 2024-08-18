@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { styles } from "../styles/styles";
+import { useEffect } from "react";
 
 const cards = [
   {
@@ -41,15 +43,18 @@ const cards = [
 
 const CardCarousel = () => {
   const [selectedCard, setSelectedCard] = useState(cards[0]);
+  const [animationKey, setAnimationKey] = useState(0);
   const [cardWidth, setCardWidth] = useState("200");
   const [translateX, setTranslateX] = useState(`translate-x-[${cardWidth}px]`);
 
   const handleCardClick = (card) => {
+    setAnimationKey((prevKey) => prevKey + 1);
     setSelectedCard(card);
   };
 
   const handleNextClick = () => {
     const currentIndex = cards.indexOf(selectedCard);
+    setAnimationKey((prevKey) => prevKey + 1);
     if (currentIndex === cards.length - 1) {
       setTranslateX(`translate-x-[${cardWidth  * currentIndex}px]`);
       return setSelectedCard(cards[0]); // Go to the first card if on the last one
@@ -60,6 +65,7 @@ const CardCarousel = () => {
 
   const handlePrevClick = () => {
     const currentIndex = cards.indexOf(selectedCard);
+    setAnimationKey((prevKey) => prevKey + 1);
     if (currentIndex === 0) {
         setTranslateX(`-translate-x-[${cardWidth  * currentIndex}px]`);
       return setSelectedCard(cards[cards.length - 1]); // Go to the last card if on the first one
@@ -68,14 +74,24 @@ const CardCarousel = () => {
     setTranslateX(`-translate-x-[${cardWidth  * currentIndex}px]`);
   };
 
+//   useEffect(() => {
+  
+//   }, [selectedCard])
+  
+
   return (
     <div
-      className="relative container h-screen w-full flex flex-col justify-end items-end bg-cover bg-center "
+    key={animationKey}
+      className={`${styles.container}  relative  h-screen w-full flex flex-col justify-between items-center bg-cover bg-center animate-slide-in-right transition-transform`}
       style={{ backgroundImage: `url(${selectedCard.image})` }}
     >
-      <h2 className="absolute top-0 right-5 text-3xl md:text-5xl font-bold text-white">
-        {cards.indexOf(selectedCard)}
+      <h2 className="absolute top-0 left-5 text-3xl md:text-5xl font-bold rounded-sm p-4 brder border-blue-600 text-white">
+        {cards.indexOf(selectedCard) + 1}
       </h2>
+      <div>
+
+      <p className="text-lg md:text-xl mt-2 text-white">{selectedCard.description}</p>
+      </div>
 
       <div className="w-ful flex justify-between gap-10  space-x-4 pb-4 px-4 md:px-8 ">
         <div className=" flex flex-col justify-end items-center text-center text-white mb-8 px-4 md:px-0">
@@ -96,14 +112,12 @@ const CardCarousel = () => {
           </div>
         </div>
         <div
-          className={`translate ${translateX} flex flex-nowrap gap-10 overflow-x-hidden overflow-y-hidde bg-white`}
+          className={`translate "${translateX}" flex items-end flex-nowrap gap-10  `}
         >
           {cards.map((card) => (
             <div
               key={card.id}
-              className={`min-w-[${cardWidth}px] md:min-w-[${cardWidth}px] h-[240px] md:h-[${
-                cardWidth + 100
-              }px]  bg-gray-800 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 bg-center bg-cover cursor-pointer ${translateX}`}
+              className={`min-w-[200px] md:min-w-[200px] h-[240px] md:h-[300px] border border-t-blue-600 bg-gray-800 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 bg-center bg-cover cursor-pointer `}
               onClick={() => handleCardClick(card)}
               style={{
                 backgroundImage: `url(${card.image})`,

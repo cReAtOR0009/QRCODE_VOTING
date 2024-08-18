@@ -138,6 +138,59 @@ export default {
         huge: "5rem", // Custom huge size
         massive: "10rem", // Custom massive size
       },
+      keyframes: {
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        "fade-in-down": {
+          "0%": { opacity: "0", transform: "translateY(-10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "slide-in": {
+          "0%": { transform: "translateX(-100%)", opacity: 0 },
+          "100%": { transform: "translateX(0)", opacity: 1 },
+        },
+        "slide-in-right": {
+          "0%": { transform: "translateX(100%)", opacity: 0 },
+          // '50%': { transform: 'translateX(50%)', opacity: 0.5 },
+          "100%": { transform: "translateX(0)", opacity: 1 },
+        },
+        "slide-in-up": {
+          "0%": { transform: "translateY(100%)", opacity: 0 },
+          "100%": { transform: "translateY(0)", opacity: 1 },
+        },
+        "slide-in-down": {
+          "0%": { transform: "translateY(-100%)", opacity: 0 },
+          "100%": { transform: "translateY(0)", opacity: 1 },
+        },
+        "pop-up": {
+          "0%": { transform: "scale(0.5)", opacity: 0 },
+          "80%": { transform: "scale(1.1)", opacity: 1 },
+          "100%": { transform: "scale(1)", opacity: 1 },
+        },
+        "pop-up-infinite": {
+          // '0%, 100%': { transform: 'scale(0.7)', opacity: 0 },
+          '33%': { transform: 'scale(1.05)', opacity: 1 },
+          '66%': { transform: 'scale(0.9)', opacity: 1 },
+          '100%': { transform: 'scale(1)', opacity: 1 },
+        },
+        "shine-left": {
+          "0%": { backgroundPosition: "200% center" },
+          "100%": { backgroundPosition: "0% center" },
+        },
+      },
+      animation: {
+        "fade-in": "fade-in 1s ease-in-out",
+        "fade-in-down": "fade-in-down 1s ease-in-out",
+        "slide-in": "slide-in 0.3s ease-in-out",
+        "slide-in-right": "slide-in-right 0.3s ease-in-out",
+        "slide-in-up": "slide-in-up 0.3s ease-in-out",
+        "slide-in-down": "slide-in-down 0.3s ease-in-out",
+        "pop-up": "pop-up 0.3s ease-out forwards",
+        "pop-up-infinite": "pop-up-infinite 0.6s ease-out infinite",
+        "shine-left": "shine 2s ease-in-out infinite",
+      },
     },
   },
   plugins: [],

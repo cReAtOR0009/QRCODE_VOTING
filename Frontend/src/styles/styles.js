@@ -2,6 +2,7 @@ import { Container } from "postcss";
 
 const styles = {
   container: "px-4 py-6 sm:px-10 md:py-10  lg:p-20 xl:p-20 ",
+  container: "px-4 py-6 sm:px-10 md:py-10  lg:px-20 lg:py-10 xl:px-20 xl:py-10",
   h1: "text-[40px] md:text-[5vw] lg:[40vw] xl:text-[40%] font-bold text-white leading-tight",
   h2: "text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-semibold leading-snug text-secondary2",
   h3: "text-xl md:text-2xl lg:text-2xl xl:text-2xl font-medium leading-normal",

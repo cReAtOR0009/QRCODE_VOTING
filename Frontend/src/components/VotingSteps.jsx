@@ -10,7 +10,7 @@ const VotingSteps = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* Step 1 */}
-              <div className="bg-white shadow-lg rounded-lg p-6">
+              <div className="bg-white shadow-lg rounded-lg p-6 transition hover:shadow-xl hover:shadow-blue-600">
                 <div className="flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-full mb-4">
                   1
                 </div>
@@ -24,7 +24,7 @@ const VotingSteps = () => {
               </div>
     
               {/* Step 2 */}
-              <div className="bg-white shadow-lg rounded-lg p-6">
+              <div className="bg-white shadow-lg rounded-lg p-6 transition hover:shadow-xl hover:shadow-blue-600">
                 <div className="flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-full mb-4">
                   2
                 </div>
@@ -38,7 +38,7 @@ const VotingSteps = () => {
               </div>
     
               {/* Step 3 */}
-              <div className="bg-white shadow-lg rounded-lg p-6">
+              <div className="bg-white shadow-lg rounded-lg p-6 transition hover:shadow-xl hover:shadow-blue-600">
                 <div className="flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-full mb-4">
                   3
                 </div>
@@ -51,7 +51,7 @@ const VotingSteps = () => {
               </div>
     
               {/* Step 4 */}
-              <div className="bg-white shadow-lg rounded-lg p-6">
+              <div className="bg-white shadow-lg rounded-lg p-6 transition hover:shadow-xl hover:shadow-blue-600">
                 <div className="flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-full mb-4">
                   4
                 </div>
@@ -65,7 +65,7 @@ const VotingSteps = () => {
               </div>
     
               {/* Step 5 */}
-              <div className="bg-white shadow-lg rounded-lg p-6">
+              <div className="bg-white shadow-lg rounded-lg p-6 transition hover:shadow-xl hover:shadow-blue-600">
                 <div className="flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-full mb-4">
                   5
                 </div>

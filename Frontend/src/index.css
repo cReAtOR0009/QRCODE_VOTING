@@ -9,6 +9,10 @@
   /* border: 1px solid #535bf2; */
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .bgimage {
   background: url("./assets//melodyofthespiritBig.jpg");
   background-position: cover;
